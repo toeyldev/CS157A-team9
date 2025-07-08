@@ -1,9 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="css/signin.css">
     <title>Sign In</title>
 </head>
 <body>
+<div>
   <h2>Sign In</h2>
   <form action="login" method="post">
     <div>
@@ -26,4 +28,5 @@
     <a href="forgotPassword">Forgot Password?</a>
   </p>
 </body>
+</div>
 </html>
