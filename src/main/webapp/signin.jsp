@@ -7,10 +7,10 @@
 <body>
 <div>
   <h2>Sign In</h2>
-  <form action="login" method="post">
+  <form action="/OSINTMe-1.0-SNAPSHOT/login-servlet" method="post">
     <div>
-      <label for="username">UserID or Email:</label><br/>
-      <input type="text" id="username" name="username" required>
+      <label for="email">UserID or Email:</label><br/>
+      <input type="text" id="email" name="email" required>
     </div>
 
     <div style="margin-top:8px;">
