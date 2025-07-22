@@ -9,7 +9,7 @@
   <h2>Sign In</h2>
   <form action="${pageContext.request.contextPath}/login-servlet" method="post">
   <div>
-      <label for="email">UserID or Email:</label><br/>
+      <label for="email">Email:</label><br/>
       <input type="text" id="email" name="email" required>
     </div>
 
