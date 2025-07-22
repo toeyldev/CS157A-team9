@@ -7,8 +7,8 @@
 <body>
 <div>
   <h2>Sign In</h2>
-  <form action="/OSINTMe-1.0-SNAPSHOT/login-servlet" method="post">
-    <div>
+  <form action="${pageContext.request.contextPath}/login-servlet" method="post">
+  <div>
       <label for="email">UserID or Email:</label><br/>
       <input type="text" id="email" name="email" required>
     </div>

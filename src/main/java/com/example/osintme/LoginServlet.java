@@ -1,22 +1,15 @@
 package com.example.osintme;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.annotation.WebServlet;
-
-import java.io.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
@@ -29,7 +22,7 @@ public class LoginServlet extends HttpServlet {
             // Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Connection to MySql
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "changeme");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
             // Query to check if email password in Users table
             String loginSql = "SELECT * FROM User WHERE email = ? AND password = ?";
@@ -39,8 +32,15 @@ public class LoginServlet extends HttpServlet {
             ResultSet result = prepare.executeQuery();
 
             // Redirects user if result is returned
-            if (result.next() == true) {
-                response.sendRedirect("admin_dashboard.jsp");
+            if (result.next()) {
+                String privilege = result.getString("privilege");
+
+                if (privilege.equals("Admin")) {
+                    response.sendRedirect("admin_dashboard.jsp");
+                }
+                else if (privilege.equals("User")) {
+                    response.sendRedirect("user_dashboard.jsp");
+                }
             } else {
                 request.setAttribute("error", "Invalid email or password");
                 request.getRequestDispatcher("signin.jsp").forward(request, response);
