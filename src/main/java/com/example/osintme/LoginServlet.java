@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,13 +34,17 @@ public class LoginServlet extends HttpServlet {
 
             // Redirects user if result is returned
             if (result.next()) {
+                int userId = result.getInt("user_id");
                 String privilege = result.getString("privilege");
+
+                HttpSession session = request.getSession(true);
+                session.setAttribute("userId", userId);
 
                 if (privilege.equals("Admin")) {
                     response.sendRedirect("admin_dashboard.jsp");
                 }
                 else if (privilege.equals("User")) {
-                    response.sendRedirect("user_dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/dashboard");
                 }
             } else {
                 request.setAttribute("error", "Invalid email or password");
