@@ -37,7 +37,6 @@ public class UserDashboardServlet extends HttpServlet {
         }
 
         request.setAttribute("name", name);
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user_dashboard.jsp");
-        rd.forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/user_dashboard.jsp").forward(request, response);
     }
 }

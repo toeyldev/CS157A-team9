@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userId", userId);
 
                 if (privilege.equals("Admin")) {
-                    response.sendRedirect("admin_dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/admin-dashboard");
                 }
                 else if (privilege.equals("User")) {
                     response.sendRedirect(request.getContextPath() + "/dashboard");
