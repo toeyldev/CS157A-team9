@@ -5,8 +5,8 @@
     <title>User Dashboard</title>
 </head>
 <body>
-<div class="top-right-logout">
-    <a href="${pageContext.request.contextPath}/signin.jsp">Log out</a>
+<div class="back-button-container">
+    <a href="${pageContext.request.contextPath}/signin.jsp" class="button-link">Log out</a>
 </div>
 
 <h1>Welcome, ${name}!</h1>

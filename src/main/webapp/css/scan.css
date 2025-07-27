@@ -38,6 +38,14 @@
   padding: 4px 12px;
 }
 
+.button-link:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  text-decoration: none;
+}
+
 /* from signin.css */
 .pii-grid input {
   padding: 0.75rem 1rem;

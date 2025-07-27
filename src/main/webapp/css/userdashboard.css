@@ -103,3 +103,11 @@ h1 {
 .top-right-logout a:hover {
     color: var(--primary-blue);
 }
+
+.back-button-container {
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    padding: 2px;
+    max-width: 200px;
+}
