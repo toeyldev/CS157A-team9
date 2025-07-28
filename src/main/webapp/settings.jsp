@@ -107,7 +107,7 @@
         </div>
 
         <div style="margin-top: 12px">
-          <button type="submit">Initiate Scan</button>
+          <button type="submit">Save Changes</button>
         </div>
       </form>
     </div>

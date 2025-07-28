@@ -3,7 +3,6 @@ package com.example.osintme;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.sql.*;
 
@@ -133,6 +132,6 @@ public class LoadSettingsServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("/initiate_scan.jsp").forward(request, response);
+        request.getRequestDispatcher("/settings.jsp").forward(request, response);
     }
 }

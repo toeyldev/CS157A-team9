@@ -3,7 +3,6 @@ package com.example.osintme;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.sql.*;
 
