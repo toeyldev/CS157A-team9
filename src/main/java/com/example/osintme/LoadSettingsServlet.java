@@ -18,6 +18,7 @@ public class LoadSettingsServlet extends HttpServlet {
                 return;
             }
 
+            // Gets user ID from the session
             int userId = (Integer) session.getAttribute("userId");
 
             String first_name, middle_name, last_name, address, state, zip_code, city, phone, birthday, email, nickname;
@@ -43,7 +44,7 @@ public class LoadSettingsServlet extends HttpServlet {
             prepare.setInt(1, userId);
             ResultSet result = prepare.executeQuery();
 
-            // If first_name is found, sets the {firstName} in initiate_scan.jsp to it
+            // If first_name is found, sets the {first_name} in settings.jsp to it
             if (result.next()) {
                 first_name = result.getString("first_name");
                 request.setAttribute("first_name", first_name);

@@ -17,7 +17,7 @@
 
       <form
         method="post"
-        action="${pageContext.request.contextPath}/update-servlet"
+        action="${pageContext.request.contextPath}/update-settings-servlet"
       >
         <div class="pii-grid">
           <div>

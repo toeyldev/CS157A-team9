@@ -1,4 +1,5 @@
 @import url("signin.css");
+@import url("userdashboard.css");
 
 .container {
   background: var(--white);
@@ -22,6 +23,27 @@
   color: var(--gray-700);
   margin-bottom: 0.25rem;
   display: block;
+}
+
+/* from userdashboard.css */
+.back-button-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 2px;
+  max-width: 200px;
+}
+
+.button-link {
+  padding: 4px 12px;
+}
+
+.button-link:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  text-decoration: none;
 }
 
 /* from signin.css */

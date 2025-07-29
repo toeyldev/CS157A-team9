@@ -43,7 +43,7 @@ public class LoadScanServlet extends HttpServlet {
             prepare.setInt(1, userId);
             ResultSet result = prepare.executeQuery();
 
-            // If first_name is found, sets the {firstName} in initiate_scan.jsp to it
+            // If first_name is found, sets the {first_name} in initiate_scan.jsp to it
             if (result.next()) {
                 first_name = result.getString("first_name");
                 request.setAttribute("first_name", first_name);
