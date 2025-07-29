@@ -4,9 +4,14 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admindashboard.css">
   <title>Admin Dashboard</title>
 </head>
+
+<header class="header">
+  <h1 class="header-text">OSINTMe</h1>
+</header>
+
 <body>
-<div class="top-right-logout">
-  <a href="${pageContext.request.contextPath}/signin.jsp">Log out</a>
+<div class="back-button-container">
+  <a href="${pageContext.request.contextPath}/signin.jsp" class="button-link">Log out</a>
 </div>
 
 <h1>Welcome, Admin!</h1>
@@ -17,4 +22,9 @@
   <a href="${pageContext.request.contextPath}/system_metrics.jsp" class="button-link">System Metrics</a>
 </div>
 </body>
+
+<footer class="footer">
+  <p>&copy; 2025 OSINTMe. All rights reserved.</p>
+</footer>
+
 </html>
