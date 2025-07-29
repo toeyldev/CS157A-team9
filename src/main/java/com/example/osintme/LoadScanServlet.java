@@ -18,6 +18,7 @@ public class LoadScanServlet extends HttpServlet {
                 return;
             }
 
+            // Gets user ID from the session
             int userId = (Integer) session.getAttribute("userId");
 
             String first_name, middle_name, last_name, address, state, zip_code, city, phone, birthday, email, nickname;
@@ -129,7 +130,12 @@ public class LoadScanServlet extends HttpServlet {
                 request.setAttribute("nickname", nickname);
             }
 
-        } catch (Exception e) {
+            // Close connection
+            result.close();
+            prepare.close();
+            connection.close();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         request.getRequestDispatcher("/initiate_scan.jsp").forward(request, response);

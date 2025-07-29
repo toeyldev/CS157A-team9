@@ -27,6 +27,7 @@
               id="first_name"
               name="first_name"
               value="${first_name}"
+              placeholder="John"
             />
           </div>
 
@@ -37,6 +38,7 @@
               id="middle_name"
               name="middle_name"
               value="${middle_name}"
+              placeholder="Jane"
             />
           </div>
 
@@ -47,17 +49,30 @@
               id="last_name"
               name="last_name"
               value="${last_name}"
+              placeholder="Doe"
             />
           </div>
 
           <div>
             <label for="address">Address</label>
-            <input type="text" id="address" name="address" value="${address}" />
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value="${address}"
+              placeholder="123 First St"
+            />
           </div>
 
           <div>
             <label for="state">State</label>
-            <input type="text" id="state" name="state" value="${state}" />
+            <input
+              type="text"
+              id="state"
+              name="state"
+              value="${state}"
+              placeholder="CA"
+            />
           </div>
 
           <div>
@@ -67,17 +82,30 @@
               id="zip_code"
               name="zip_code"
               value="${zip_code}"
+              placeholder="12345"
             />
           </div>
 
           <div>
             <label for="city">City</label>
-            <input type="text" id="city" name="city" value="${city}" />
+            <input
+              type="text"
+              id="city"
+              name="city"
+              value="${city}"
+              placeholder="San Jose"
+            />
           </div>
 
           <div>
             <label for="phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" value="${phone}" />
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value="${phone}"
+              placeholder="xxx-xxx-xxxx"
+            />
           </div>
 
           <div>
@@ -87,12 +115,19 @@
               id="birthday"
               name="birthday"
               value="${birthday}"
+              placeholder="yyyy-mm-dd"
             />
           </div>
 
           <div>
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" value="${email}" />
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value="${email}"
+              placeholder="name@example.com"
+            />
           </div>
 
           <div>
@@ -102,6 +137,7 @@
               id="nickname"
               name="nickname"
               value="${nickname}"
+              placeholder="John"
             />
           </div>
         </div>

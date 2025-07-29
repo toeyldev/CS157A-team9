@@ -130,7 +130,12 @@ public class LoadSettingsServlet extends HttpServlet {
                 request.setAttribute("nickname", nickname);
             }
 
-        } catch (Exception e) {
+            // Close connection
+            result.close();
+            prepare.close();
+            connection.close();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         request.getRequestDispatcher("/settings.jsp").forward(request, response);

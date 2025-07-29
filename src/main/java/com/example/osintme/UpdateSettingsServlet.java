@@ -1,19 +1,14 @@
 package com.example.osintme;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.sql.*;
 
 @WebServlet(name = "updateSettingsServlet", value = "/update-settings-servlet")
 public class UpdateSettingsServlet extends HttpServlet {
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             // Check http session connection
@@ -145,6 +140,10 @@ public class UpdateSettingsServlet extends HttpServlet {
             if (affectedRows > 0) {
                 request.setAttribute("nickname", nickname);
             }
+
+            // Close connection
+            prepare.close();
+            connection.close();
         }
         catch (Exception e) {
             e.printStackTrace();

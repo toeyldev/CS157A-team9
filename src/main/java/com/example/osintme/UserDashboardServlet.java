@@ -23,7 +23,7 @@ public class UserDashboardServlet extends HttpServlet {
         String infosql = "SELECT first_name FROM Personal_Information WHERE user_id = ?";
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
-             PreparedStatement prepare = connection.prepareStatement(infosql)) {
+            PreparedStatement prepare = connection.prepareStatement(infosql)) {
             prepare.setInt(1, userId);
 
             try (ResultSet result = prepare.executeQuery()) {
