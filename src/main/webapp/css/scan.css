@@ -97,6 +97,6 @@ form::after {
 
 input::placeholder {
   color: grey;
-  opacity: 0.5;
+  opacity: 0.25;
   font-style: italic;
 }

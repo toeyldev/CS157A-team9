@@ -6,9 +6,9 @@
   </head>
 
   <div class="back-button-container">
-    <a href="${pageContext.request.contextPath}/dashboard" class="button-link"
-      >Back to Dashboard</a
-    >
+    <a href="${pageContext.request.contextPath}/dashboard" class="button-link">
+      Back to Dashboard
+    </a>
   </div>
 
   <body>
@@ -27,7 +27,7 @@
               id="first_name"
               name="first_name"
               value="${first_name}"
-              placeholder="John"
+              placeholder="First name"
             />
           </div>
 
@@ -38,7 +38,7 @@
               id="middle_name"
               name="middle_name"
               value="${middle_name}"
-              placeholder="Jane"
+              placeholder="Middle name"
             />
           </div>
 
@@ -49,7 +49,7 @@
               id="last_name"
               name="last_name"
               value="${last_name}"
-              placeholder="Doe"
+              placeholder="Last name"
             />
           </div>
 
@@ -93,7 +93,7 @@
               id="city"
               name="city"
               value="${city}"
-              placeholder="San Jose"
+              placeholder="City"
             />
           </div>
 
@@ -137,7 +137,7 @@
               id="nickname"
               name="nickname"
               value="${nickname}"
-              placeholder="John"
+              placeholder="Nickname"
             />
           </div>
         </div>

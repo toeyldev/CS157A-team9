@@ -1,6 +1,7 @@
 com/example/osintme/UpdateSettingsServlet.class
 com/example/osintme/LoadScanServlet.class
 com/example/osintme/LoginServlet.class
+com/example/osintme/RegisterServlet.class
 com/example/osintme/LoadSettingsServlet.class
 com/example/osintme/HelloServlet.class
 com/example/osintme/UserDashboardServlet.class

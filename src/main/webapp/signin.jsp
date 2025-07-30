@@ -8,7 +8,7 @@
 <div>
   <h2>Sign In</h2>
   <form action="${pageContext.request.contextPath}/login-servlet" method="post">
-  <div>
+    <div>
       <label for="email">Email:</label><br/>
       <input type="text" id="email" name="email" required>
     </div>
@@ -24,8 +24,8 @@
   </form>
 
   <p style="margin-top:16px;">
-    <a href="register">Register</a> |
-    <a href="forgotPassword">Forgot Password?</a>
+    <a href="${pageContext.request.contextPath}/register.jsp">Register</a> |
+    <a href="${pageContext.request.contextPath}/forgot_password.jsp">Forgot Password?</a>
   </p>
 </body>
 </div>

@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 
-@WebServlet(name = "loginServlet", value = "/login-servlet")
+@WebServlet(name = "LoginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
 
             // Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Connection to MySql
+            // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
             // Query to check if email password in Users table

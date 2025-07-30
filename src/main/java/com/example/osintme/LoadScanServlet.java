@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 
-@WebServlet(name = "loadScanServlet", urlPatterns = {"/initiate_scan"})
+@WebServlet(name = "LoadScanServlet", urlPatterns = {"/initiate_scan"})
 public class LoadScanServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class LoadScanServlet extends HttpServlet {
             String emailSql = "SELECT email FROM osintme.User WHERE user_id = ?";
             String nicknameSql = "SELECT nickname FROM osintme.Personal_Information WHERE user_id = ?";
 
-            // Connection to MySql
+            // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
             // Query to check if first_name present in User table

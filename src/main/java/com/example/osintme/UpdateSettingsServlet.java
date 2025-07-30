@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 
-@WebServlet(name = "updateSettingsServlet", value = "/update-settings-servlet")
+@WebServlet(name = "UpdateSettingsServlet", value = "/update-settings-servlet")
 public class UpdateSettingsServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +47,7 @@ public class UpdateSettingsServlet extends HttpServlet {
             String emailSql = "UPDATE osintme.User SET email = ? WHERE user_id = ?";
             String nicknameSql = "UPDATE osintme.Personal_Information SET nickname = ? WHERE pii_id IN (SELECT * FROM (SELECT pii_id FROM osintme.Personal_Information WHERE user_id = ?) AS temp)";
 
-            // Connection to MySql
+            // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
             
             // Update first_name in Personal_Information table
