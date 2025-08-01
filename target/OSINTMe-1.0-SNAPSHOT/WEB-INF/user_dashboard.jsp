@@ -18,7 +18,7 @@
 
 <div class="dashboard-buttons">
   <a href="${pageContext.request.contextPath}/settings" class="button-link">Settings</a>
-  <a href="${pageContext.request.contextPath}/breach_reports.jsp" class="button-link">Breach Reports</a>
+  <a href="${pageContext.request.contextPath}/initiate_scan" class="button-link">Breach Reports</a>
   <a href="${pageContext.request.contextPath}/initiate_scan" class="button-link">Initiate Scan</a>
 </div>
 </body>

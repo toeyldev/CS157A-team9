@@ -3,6 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <context-param>
+        <param-name>hibpApiKey</param-name>
+        <param-value>3d1e756b55f046728230ceb2d5e893e2</param-value>
+    </context-param>
+
     <welcome-file-list>
         <welcome-file>signin.jsp</welcome-file>
     </welcome-file-list>

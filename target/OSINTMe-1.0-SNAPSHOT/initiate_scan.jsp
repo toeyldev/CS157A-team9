@@ -17,7 +17,7 @@
 
       <form
         method="post"
-        action="${pageContext.request.contextPath}/scan-servlet"
+        action="${pageContext.request.contextPath}/scan"
       >
         <div class="pii-grid">
           <div>
