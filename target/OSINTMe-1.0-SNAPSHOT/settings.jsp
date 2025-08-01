@@ -13,7 +13,7 @@
 
   <body>
     <div class="container">
-      <h2>Settings</h2>
+      <h2>Your Settings</h2>
 
       <form
         method="post"

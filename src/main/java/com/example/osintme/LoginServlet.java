@@ -11,7 +11,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter("email");
+            String email = request.getParameter("email").trim();
             String password = request.getParameter("password");
 
             // Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
-            // Query to check if email password in Users table
+            // Query to check if email + password in Users table
             String loginSql = "SELECT * FROM User WHERE email = ? AND password = ?";
             PreparedStatement prepare = connection.prepareStatement(loginSql);
             prepare.setString(1, email);
@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/dashboard");
                 }
             } else {
-                request.setAttribute("error", "Invalid email or password");
+                // request.setAttribute("error", "Invalid email or password");
                 request.getRequestDispatcher("signin.jsp").forward(request, response);
             }
 
@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
+            request.getRequestDispatcher("signin.jsp").forward(request, response);
         }
     }
 }

@@ -1,8 +1,13 @@
-com/example/osintme/UpdateSettingsServlet.class
-com/example/osintme/LoadScanServlet.class
-com/example/osintme/LoginServlet.class
+com/example/osintme/RegisterCodeServlet.class
 com/example/osintme/RegisterServlet.class
 com/example/osintme/LoadSettingsServlet.class
 com/example/osintme/HelloServlet.class
 com/example/osintme/UserDashboardServlet.class
 com/example/osintme/AdminDashboardServlet.class
+com/example/osintme/ForgotServlet.class
+com/example/osintme/RegisterCodeServlet$1.class
+com/example/osintme/UpdateSettingsServlet.class
+com/example/osintme/LoadScanServlet.class
+com/example/osintme/LoginServlet.class
+com/example/osintme/ForgotCodeServlet$1.class
+com/example/osintme/ForgotCodeServlet.class

@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
+
 // import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "RegisterServlet", value = "/register-servlet")
@@ -12,42 +13,79 @@ public class RegisterServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String first_name = request.getParameter("first_name");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            HttpSession session = request.getSession();
+            if (session == null) {
+                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+                return;
+            }
 
+            String code = request.getParameter("code").trim();
+            String verify_code = (String) session.getAttribute("verify_code"); // gets the verification code from SendCodeServlet temp attribute
+
+            // If verify_code is empty/wrong, redirect them back to signin.jsp
+            if (verify_code == null || !code.equals(verify_code)) {
+                // request.getRequestDispatcher(request.getContextPath() + "/register.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+                return;
+            }
+
+            // Otherwise, create an account and send them to dashboard
+            /*String first_name = request.getParameter("first_name");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");*/
+            String first_name = (String) session.getAttribute("first_name");
+            String email = (String) session.getAttribute("email");
+            String password = (String) session.getAttribute("password");
             // Hashing the password?
             // String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
             
-            // Query to check if user_id/email already exists in the db
-            String checkEmailSql = "SELECT user_id FROM User WHERE email = ?";
-            PreparedStatement prepare = connection.prepareStatement(checkEmailSql);
-            prepare.setString(1, email);
-            ResultSet result = prepare.executeQuery();
-
-            // Returns [] if so:
-            if (result.next()) {
-                // []
-            }
-
-            // If above didn't return anything, make a new user
-            String registerSql = "INSERT INTO User (email, password) VALUES (?, ?)";
+            // Update query to create a email + password in User table
+            String registerSql = "INSERT INTO osintme.User (email, password) VALUES (?, ?)";
+            PreparedStatement prepare = connection.prepareStatement(registerSql);
             prepare.setString(1, email);
             prepare.setString(2, password);
             int affectedRows = prepare.executeUpdate();
 
             if (affectedRows > 0) {
+                // Update query to add first_name to PII table
+                registerSql = "INSERT INTO osintme.Personal_Information (user_id, first_name, last_name, phone) VALUES ((SELECT user_id FROM osintme.User WHERE email = ?), ?, '', '')";
+                prepare = connection.prepareStatement(registerSql);
+                prepare.setString(1, email);
+                prepare.setString(2, first_name);
+                affectedRows = prepare.executeUpdate();
 
+                // User created, unique user_id made automatically by the db, redirect to UserDashboardServlet.java
+                if (affectedRows > 0) {
+                    // Query to check if email + password in Users table
+                    registerSql = "SELECT * FROM User WHERE email = ? AND password = ?";
+                    prepare = connection.prepareStatement(registerSql);
+                    prepare.setString(1, email);
+                    prepare.setString(2, password);
+                    ResultSet result = prepare.executeQuery();
+
+                    // Redirects user if result is returned
+                    if (result.next()) {
+                        int userId = result.getInt("user_id");
+                        session.setAttribute("userId", userId);
+                        response.sendRedirect(request.getContextPath() + "/dashboard");
+                    }
+                    result.close();
+                }
             }
-            
-            // have to make email verifhy first
+            // DELETE FROM osintme.Personal_Information WHERE pii_id = 11
+            // DELETE FROM osintme.User WHERE user_id = 21
 
+            // Close connection
+            prepare.close();
+            connection.close();
         }
         catch (Exception e) {
             e.printStackTrace();
+            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }
 }
