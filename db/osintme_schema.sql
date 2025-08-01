@@ -113,7 +113,7 @@ CREATE TABLE `Breach_Report` (
   `pii_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`report_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `Location` (
 
 LOCK TABLES `Location` WRITE;
 /*!40000 ALTER TABLE `Location` DISABLE KEYS */;
-INSERT INTO `Location` VALUES (4,'123 W San Carlos St','San Jose','CA','95126'),(5,'456 Homestead Rd','Santa Clara','CA','95050'),(6,'789 Fair Oaks Ave','Sunnyvale','CA','94086'),(7,'321 Castro St','Mountain View','CA','94041'),(8,'654 University Ave','Palo Alto','CA','94301'),(9,'987 Main St','Cupertino','CA','95014'),(10,'246 N Milpitas Blvd','Milpitas','CA','95035'),(18,'369 El Camino Real','Redwood City','CA','94063'),(19,'159 Broadway','Oakland','CA','94607'),(20,'753 University Ave','Berkeley','CA','94710');
+INSERT INTO `Location` VALUES (4,'123 W San Carlos St','San Jose','CA','95126'),(5,'456 Homestead Rd','Santa Clara','CA','95050'),(6,'789 Fair Oaks Ave','Sunnyvale','CA','94086'),(7,'321 Castro St','Mountain View','CA','94041'),(8,'654 University Ave','Palo Alto','CA','94301'),(9,'987 Main St','Cupertino','CA','95014'),(10,'246 N Milpitas Blvd','Milpitas','CA','95035'),(18,'369 El Camino Real','Redwood City','CA','94063'),(19,'159 Broadway','Oakland','CA','94607'),(20,'753 University Ave','Berkeley','CA','94710'),(22,'123 Homestead Rd','Santa Clara','CA','95050'),(23,'476 Homestead Rd','Santa Clara','CA','95050'),(24,'523 El Camino Real','Redwood City','CA','94063'),(25,'684 Castro St','Mountain View','CA','94041');
 /*!40000 ALTER TABLE `Location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +195,7 @@ CREATE TABLE `Personal_Information` (
   `last_update` datetime DEFAULT NULL,
   `address_id` int DEFAULT NULL,
   PRIMARY KEY (`pii_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +204,7 @@ CREATE TABLE `Personal_Information` (
 
 LOCK TABLES `Personal_Information` WRITE;
 /*!40000 ALTER TABLE `Personal_Information` DISABLE KEYS */;
-INSERT INTO `Personal_Information` VALUES (1,4,'David','Michael','Chen','408-555-1234','Dave','1988-02-14','2025-07-08 00:28:10',4),(2,5,'Emily','Rose','Lopez','408-555-2345','Em','1990-07-30','2025-07-08 00:28:10',5),(3,6,'Frank',NULL,'Liu','408-555-3456',NULL,'1985-11-22','2025-07-08 00:28:10',6),(4,7,'Grace','Anne','Khan','408-555-4567','Gracie','1992-05-05','2025-07-08 00:28:10',7),(5,8,'Henry',NULL,'Zhang','408-555-5678',NULL,'1991-03-17','2025-07-08 00:28:10',8),(6,9,'Isabel','Marie','Anderson','408-555-6789','Izzy','1989-09-09','2025-07-08 00:28:10',9),(7,10,'Jason','Edward','Miller','408-555-7890','Jay','1993-12-01','2025-07-08 00:28:10',10),(8,18,'Kevin','Patrick','Murphy','408-555-8901','Kev','1990-04-02','2025-07-08 00:28:10',18),(9,19,'Lily','Grace','Davis','408-555-9012',NULL,'1994-08-08','2025-07-08 00:28:10',19),(10,20,'Michael','Quan','Tan','408-555-0123','Mike','1987-06-06','2025-07-08 00:28:10',20);
+INSERT INTO `Personal_Information` VALUES (1,4,'David','Michael','Chen','408-555-1234','Dave','1988-02-14','2025-07-08 00:28:10',4),(2,5,'Emily','Rose','Lopez','408-555-2345','Em','1990-07-30','2025-07-08 00:28:10',5),(3,6,'Joe','','Liu','408-555-3456','','1985-11-22','2025-07-08 00:28:10',6),(4,7,'Grace','Anne','Khan','408-555-4567','Gracie','1992-05-05','2025-07-08 00:28:10',7),(5,8,'Henry',NULL,'Zhang','408-555-5678',NULL,'1991-03-17','2025-07-08 00:28:10',8),(6,9,'Isabel','Marie','Anderson','408-555-6789','Izzy','1989-09-09','2025-07-08 00:28:10',9),(7,10,'Jason','Edward','Miller','408-555-7890','Jay','1993-12-01','2025-07-08 00:28:10',10),(8,18,'Kevin','Patrick','Murphy','408-555-8901','Kev','1990-04-02','2025-07-08 00:28:10',18),(9,19,'Lily','Grace','Davis','408-555-9012',NULL,'1994-08-08','2025-07-08 00:28:10',19),(10,20,'Michael','Quan','Tan','408-555-0123','Mike','1987-06-06','2025-07-08 00:28:10',20),(11,22,'Alice',NULL,'Anderson','408-553-1932',NULL,'2003-02-02','2025-07-30 20:21:02',NULL),(12,23,'Janice',NULL,'Chang','408-376-0341',NULL,'1990-01-01','2025-08-01 14:02:27',23),(13,24,'Queenie',NULL,'Wong','408-164-2235',NULL,'1991-02-02','2025-08-01 14:02:27',24),(14,25,'Bob',NULL,'Smith','405-223-0102',NULL,'1992-03-03','2025-08-01 14:02:27',25);
 /*!40000 ALTER TABLE `Personal_Information` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +275,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +284,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'toey.lui@sjsu.edu','29nSl3ns04','2025-07-08 00:06:45','Active','Admin'),(2,'patrick.luong@sjsu.edu','3n!*2nfkl3','2025-07-08 00:06:45','Active','Admin'),(3,'victor.le@sjsu.edu','C@2kjf3l!0','2025-07-08 00:06:45','Active','Admin'),(4,'david.chen@sjsu.edu','Dav1dCh3n','2025-07-08 00:06:45','Active','User'),(5,'emily.lopez@sjsu.edu','Emp0WeR2','2025-07-08 00:06:45','Active','User'),(6,'frank.liu@sjsu.edu','Fr4nkl!u','2025-07-08 00:06:45','Active','User'),(7,'grace.khan@sjsu.edu','Gr8c3Kh@n','2025-07-08 00:06:45','Active','User'),(8,'henry.zhang@sjsu.edu','H3nryZh@ng','2025-07-08 00:06:45','Active','User'),(9,'isabel.anderson@sjsu.edu','Is@B3lAn','2025-07-08 00:06:45','Active','User'),(10,'jason.miller@sjsu.edu','Ja5onM!ll','2025-07-08 00:06:45','Active','User'),(11,'alex.johnson@sjsu.edu','Al3xJ0hn!','2025-07-08 00:21:38','Active','Admin'),(12,'brenda.smith@sjsu.edu','Br3nd@$m!','2025-07-08 00:21:38','Active','Admin'),(13,'charles.lee@sjsu.edu','Ch4rl3sL#e','2025-07-08 00:21:38','Active','Admin'),(14,'dorothy.kim@sjsu.edu','D0r0thyK!m','2025-07-08 00:21:38','Active','Admin'),(15,'ethan.ross@sjsu.edu','3th@nR0ss','2025-07-08 00:21:38','Active','Admin'),(16,'fiona.cho@sjsu.edu','F1on@Ch0','2025-07-08 00:21:38','Active','Admin'),(17,'gabriel.park@sjsu.edu','G@br1elP4rk','2025-07-08 00:21:38','Active','Admin'),(18,'kevin.murphy@sjsu.edu','K3v1nM!p','2025-07-08 00:21:38','Active','User'),(19,'lily.davis@sjsu.edu','L1lyDav1s!','2025-07-08 00:21:38','Active','User'),(20,'michael.tan@sjsu.edu','M1chaelT@#','2025-07-08 00:21:38','Active','User');
+INSERT INTO `User` VALUES (1,'toey.lui@sjsu.edu','29nSl3ns04','2025-07-08 00:06:45','Active','Admin'),(2,'patick.luong@sjsu.edu','3n!*2nfkl3','2025-07-08 00:06:45','Active','Admin'),(3,'victor.le@sjsu.edu','C@2kjf3l!0','2025-07-08 00:06:45','Active','Admin'),(4,'david.chen@sjsu.edu','Dav1dCh3n','2025-07-08 00:06:45','Active','User'),(5,'emily.lopez@sjsu.edu','Emp0WeR2','2025-07-08 00:06:45','Active','User'),(6,'frank.liu@sjsu.edu','Fr4nkl!u','2025-07-08 00:06:45','Active','User'),(7,'grace.khan@sjsu.edu','Gr8c3Kh@n','2025-07-08 00:06:45','Active','User'),(8,'henry.zhang@sjsu.edu','H3nryZh@ng','2025-07-08 00:06:45','Active','User'),(9,'isabel.anderson@sjsu.edu','Is@B3lAn','2025-07-08 00:06:45','Active','User'),(10,'jason.miller@sjsu.edu','Ja5onM!ll','2025-07-08 00:06:45','Active','User'),(11,'alex.johnson@sjsu.edu','Al3xJ0hn!','2025-07-08 00:21:38','Active','Admin'),(12,'brenda.smith@sjsu.edu','Br3nd@$m!','2025-07-08 00:21:38','Active','Admin'),(13,'charles.lee@sjsu.edu','Ch4rl3sL#e','2025-07-08 00:21:38','Active','Admin'),(14,'dorothy.kim@sjsu.edu','D0r0thyK!m','2025-07-08 00:21:38','Active','Admin'),(15,'ethan.ross@sjsu.edu','3th@nR0ss','2025-07-08 00:21:38','Active','Admin'),(16,'fiona.cho@sjsu.edu','F1on@Ch0','2025-07-08 00:21:38','Active','Admin'),(17,'gabriel.park@sjsu.edu','G@br1elP4rk','2025-07-08 00:21:38','Active','Admin'),(18,'kevin.murphy@sjsu.edu','K3v1nM!p','2025-07-08 00:21:38','Active','User'),(19,'lily.davis@sjsu.edu','L1lyDav1s!','2025-07-08 00:21:38','Active','User'),(20,'michael.tan@sjsu.edu','M1chaelT@#','2025-07-08 00:21:38','Active','User'),(22,'alice@example.org','Al1c3lov3Sic3cr3am','2025-07-30 20:17:52','Active','User'),(23,'demo@fake.com','A7!x9#Qw2Rt%Vb6','2025-08-01 13:58:26','Active','User'),(24,'hello@demo.com','Zk3$Lp8&Yt5@Wq1n','2025-08-01 13:58:26','Active','User'),(25,'bob@testmail.com','M4^Jn6*Rc9!Vk2@z','2025-08-01 13:58:26','Active','User');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-08 13:49:50
+-- Dump completed on 2025-08-01 14:05:55
