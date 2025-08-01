@@ -9,6 +9,10 @@
     <div>
       <h2>Register</h2>
 
+      <% String error = (String) request.getAttribute("error"); %>
+      <% if (error != null) { %>
+        <div style="color: red"><%= error %></div>
+      <% } %>
       <!-- Send code section of the page -->
       <form
         action="${pageContext.request.contextPath}/register-code-servlet"

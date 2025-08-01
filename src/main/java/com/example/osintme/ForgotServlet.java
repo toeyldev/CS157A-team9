@@ -20,10 +20,11 @@ public class ForgotServlet extends HttpServlet {
             String code = request.getParameter("code").trim();
             String verify_code = (String) session.getAttribute("verify_code"); // gets the verification code from SendCodeServlet temp attribute
 
-            // If verify_code is empty/wrong, redirect them back to signin.jsp
+            // If verify_code is empty/wrong, dispatch them to forgot_password.jsp
             if (verify_code == null || !code.equals(verify_code)) {
-                // request.getRequestDispatcher(request.getContextPath() + "/forgot_password.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+                request.setAttribute("error", "Verify code was incorrect. Try again.");
+                request.getRequestDispatcher("/forgot_password.jsp").forward(request, response);
+                // this ^ doesn't need request.getContextPath() because it doesn't lead to a different url
                 return;
             }
 
@@ -53,7 +54,8 @@ public class ForgotServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            request.setAttribute("error","Error occured.");
+            request.getRequestDispatcher("/forgot_password.jsp").forward(request, response);
             // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }

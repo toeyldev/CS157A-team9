@@ -33,7 +33,6 @@ public class ForgotCodeServlet extends HttpServlet {
             // session.setAttribute("code", code);
             session.setAttribute("verify_code", code); // this is a temp session attribute that holds verification code
 
-            // Also make sure to check uniqueness of entered email to avoid duplicates
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
             
@@ -43,9 +42,11 @@ public class ForgotCodeServlet extends HttpServlet {
             prepare.setString(1, email);
             ResultSet result = prepare.executeQuery();
 
-            // If email DOES NOT already exist in the DB, redirect them back to signin.jsp
+            // Also make sure to check uniqueness of entered email to avoid duplicates
+            // If email DOES NOT already exist in the DB, dispatch them back to forgot_password.jsp
             if (!result.next()) {
-                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+                request.setAttribute("error","No account exists for this email. Register instead.");
+                request.getRequestDispatcher("/forgot_password.jsp").forward(request, response);
                 result.close();
                 prepare.close();
                 connection.close();
@@ -95,7 +96,8 @@ public class ForgotCodeServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            request.setAttribute("error","Error occured.");
+            request.getRequestDispatcher("/forgot_password.jsp").forward(request, response);
             // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }

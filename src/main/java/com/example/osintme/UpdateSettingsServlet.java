@@ -147,7 +147,8 @@ public class UpdateSettingsServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
+            request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
-        response.sendRedirect(request.getContextPath() + "/settings");
+        request.getRequestDispatcher("/settings.jsp").forward(request, response);
     }
 }

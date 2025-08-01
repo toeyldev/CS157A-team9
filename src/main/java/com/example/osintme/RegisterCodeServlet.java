@@ -28,6 +28,29 @@ public class RegisterCodeServlet extends HttpServlet {
             String email = request.getParameter("email").trim();
             String password = request.getParameter("password");
 
+            // Check if password meets the conditions
+            boolean hasUpper, hasLower, hasDigit, hasSpecial;
+            hasUpper = hasLower = hasDigit = hasSpecial = false;
+
+            for (char c : password.toCharArray()) {
+                if (Character.isUpperCase(c)) {
+                    hasUpper = true;
+                } else if (Character.isLowerCase(c)) {
+                    hasLower = true;
+                } else if (Character.isDigit(c)) {
+                    hasDigit = true;
+                } else {
+                    hasSpecial = true;
+                }
+            }
+            
+            if (hasUpper && hasLower && hasDigit && hasSpecial && password.length() >= 8) {
+            } else {
+                request.setAttribute("error","Password should be at least 8 characters including a number, uppercase, lowercase, and special character.");
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                return;
+            }
+
             // Random 6-digit code maker
             String code = Integer.toString(new Random().nextInt(900000) + 100000);
 
@@ -37,7 +60,6 @@ public class RegisterCodeServlet extends HttpServlet {
             // session.setAttribute("code", code);
             session.setAttribute("verify_code", code); // this is a temp session attribute that holds verification code
 
-            // Also make sure to check uniqueness of entered email to avoid duplicates
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
             
@@ -47,9 +69,11 @@ public class RegisterCodeServlet extends HttpServlet {
             prepare.setString(1, email);
             ResultSet result = prepare.executeQuery();
 
-            // If email already exists, redirect them back to signin.jsp
+            // Also make sure to check uniqueness of entered email to avoid duplicates
+            // If email already exists, dispatch them back to register.jsp
             if (result.next()) {
-                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+                request.setAttribute("error","Account already exists for this email.");
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
                 result.close();
                 prepare.close();
                 connection.close();
@@ -101,7 +125,8 @@ public class RegisterCodeServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            request.setAttribute("error","Error occured.");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
             // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }

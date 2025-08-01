@@ -7,6 +7,10 @@
 <body>
 <div>
   <h2>Sign In</h2>
+  <% String error = (String) request.getAttribute("error"); %>
+  <% if (error != null) { %>
+    <div style="color: red"><%= error %></div>
+  <% } %>
   <form action="${pageContext.request.contextPath}/login-servlet" method="post">
     <div>
       <label for="email">Email:</label><br/>

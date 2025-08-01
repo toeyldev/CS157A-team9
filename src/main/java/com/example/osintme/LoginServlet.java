@@ -41,8 +41,8 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/dashboard");
                 }
             } else {
-                // request.setAttribute("error", "Invalid email or password");
-                request.getRequestDispatcher("signin.jsp").forward(request, response);
+                request.setAttribute("error", "Invalid email or password.");
+                request.getRequestDispatcher("/signin.jsp").forward(request, response);
             }
 
             // Close connection
@@ -52,7 +52,9 @@ public class LoginServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("signin.jsp").forward(request, response);
+            request.setAttribute("error","Error occured.");
+            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }
 }

@@ -22,10 +22,11 @@ public class RegisterServlet extends HttpServlet {
             String code = request.getParameter("code").trim();
             String verify_code = (String) session.getAttribute("verify_code"); // gets the verification code from SendCodeServlet temp attribute
 
-            // If verify_code is empty/wrong, redirect them back to signin.jsp
+            // If verify_code is empty/wrong, dispatch them to register.jsp
             if (verify_code == null || !code.equals(verify_code)) {
-                // request.getRequestDispatcher(request.getContextPath() + "/register.jsp").forward(request, response);
-                response.sendRedirect(request.getContextPath() + "/signin.jsp");
+                request.setAttribute("error", "Verify code was incorrect. Send another code.");
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                // this ^ doesn't need request.getContextPath() because it doesn't lead to a different url
                 return;
             }
 
@@ -42,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
             
-            // Update query to create a email + password in User table
+            // Update query to create an email + password in User table
             String registerSql = "INSERT INTO osintme.User (email, password) VALUES (?, ?)";
             PreparedStatement prepare = connection.prepareStatement(registerSql);
             prepare.setString(1, email);
@@ -84,7 +85,8 @@ public class RegisterServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("/signin.jsp").forward(request, response);
+            request.setAttribute("error","Error occured.");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
             // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }

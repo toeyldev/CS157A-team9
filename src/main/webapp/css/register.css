@@ -10,6 +10,14 @@ form::after {
   line-height: 0;
 }
 
+h2::after {
+  content: "OSINTMe";
+}
+
+body::after {
+  content: "© 2025 OSINTMe.";
+}
+
 /* from scan.css */
 input::placeholder {
   color: grey;

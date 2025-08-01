@@ -137,6 +137,7 @@ public class LoadScanServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
+            request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
         request.getRequestDispatcher("/initiate_scan.jsp").forward(request, response);
     }
