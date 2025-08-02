@@ -142,7 +142,7 @@ input[type="password"]::placeholder {
   color: var(--gray-400);
 }
 
-/* Button styling */
+
 button[type="submit"] {
   width: 100%;
   background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
@@ -187,7 +187,7 @@ button[type="submit"]:active {
   transform: translateY(0);
 }
 
-/* Links styling */
+
 p {
   text-align: center;
   margin-top: 1.5rem !important;
@@ -246,7 +246,7 @@ body::after {
   text-align: center;
 }
 
-/* Responsive Design */
+
 @media (max-width: 640px) {
   body {
     padding: 0.5rem;
@@ -268,7 +268,7 @@ body::after {
   }
 }
 
-/* Focus indicators for accessibility */
+
 button[type="submit"]:focus,
 input:focus,
 a:focus {
@@ -276,7 +276,7 @@ a:focus {
   outline-offset: 2px;
 }
 
-/* High contrast mode support */
+
 @media (prefers-contrast: high) {
   body > div {
     border: 2px solid var(--gray-900);
@@ -288,7 +288,7 @@ a:focus {
   }
 }
 
-/* Reduced motion support */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
