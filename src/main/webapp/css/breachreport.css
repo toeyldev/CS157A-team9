@@ -36,6 +36,13 @@
     max-width: 200px;
 }
 
+.scan-button-container {
+    margin-top: 30px;
+    margin-left: 20px;
+    padding: 2px;
+    max-width: 200px;
+}
+
 .button-link {
     padding: 4px 12px;
 }

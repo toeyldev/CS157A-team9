@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>hibpApiKey</param-name>
-        <param-value>"REAL_API_KEY"</param-value>
+        <param-value>REAL_API_KEY</param-value>
     </context-param>
 
     <welcome-file-list>

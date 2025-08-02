@@ -39,6 +39,16 @@ public class LoadScanServlet extends HttpServlet {
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
+            String piiSql = "SELECT pii_id FROM osintme.Personal_Information WHERE user_id = ?";
+            PreparedStatement psPii = connection.prepareStatement(piiSql);
+            psPii.setInt(1, userId);
+            ResultSet rsPii = psPii.executeQuery();
+
+            if (rsPii.next()) {
+                int piiId = rsPii.getInt("pii_id");
+                session.setAttribute("piiId", piiId);
+            }
+
             // Query to check if first_name present in User table
             PreparedStatement prepare = connection.prepareStatement(firstNameSql);
             prepare.setInt(1, userId);
