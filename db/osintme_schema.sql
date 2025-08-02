@@ -73,22 +73,13 @@ DROP TABLE IF EXISTS `Breach_Details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Breach_Details` (
-  `breach_id` int NOT NULL AUTO_INCREMENT,
-  `breached_first_name` varchar(45) DEFAULT NULL,
-  `breached_middle_name` varchar(45) DEFAULT NULL,
-  `breached_last_name` varchar(45) DEFAULT NULL,
-  `breached_nickname` varchar(45) DEFAULT NULL,
-  `breach_source` varchar(45) DEFAULT NULL,
-  `breached_email` varchar(255) DEFAULT NULL,
-  `breached_phone` varchar(20) DEFAULT NULL,
-  `breached_address` varchar(45) DEFAULT NULL,
-  `breached_city` varchar(45) DEFAULT NULL,
-  `breached_state` varchar(45) DEFAULT NULL,
-  `breached_zip_code` varchar(45) DEFAULT NULL,
-  `breached_birthday` datetime DEFAULT NULL,
-  `exposure_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`breach_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `detail_id` int NOT NULL AUTO_INCREMENT,
+  `scan_id` int NOT NULL,
+  `breach_name` varchar(100) NOT NULL,
+  `breach_date` date NOT NULL,
+  `data_leaked` text NOT NULL,
+  PRIMARY KEY (`detail_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,33 +88,8 @@ CREATE TABLE `Breach_Details` (
 
 LOCK TABLES `Breach_Details` WRITE;
 /*!40000 ALTER TABLE `Breach_Details` DISABLE KEYS */;
-INSERT INTO `Breach_Details` VALUES (1,'David','Michael','Chen',NULL,'HaveIBeenPwned','david.chen@sjsu.edu',NULL,NULL,'San Jose','CA',NULL,NULL,'2024-12-01 00:00:00'),(2,'Emily','Rose','Lopez',NULL,'BreachAlarm','emily.lopez@sjsu.edu',NULL,NULL,NULL,NULL,NULL,'1990-07-30 00:00:00','2025-01-15 00:00:00'),(3,NULL,NULL,NULL,NULL,'DeHashed',NULL,'408-555-3456','789 Fair Oaks Ave','Sunnyvale','CA','94086','1985-11-22 00:00:00','2024-09-20 00:00:00'),(4,'Grace',NULL,'Khan',NULL,'HaveIBeenPwned',NULL,NULL,NULL,NULL,NULL,NULL,'1992-05-05 00:00:00','2025-05-10 00:00:00'),(5,'Henry',NULL,'Zhang',NULL,'BreachAlarm','henry.zhang@sjsu.edu','408-555-5678','654 University Ave','Palo Alto','CA','94301','1991-03-17 00:00:00','2025-02-28 00:00:00'),(6,NULL,NULL,'Anderson',NULL,'DeHashed',NULL,NULL,'987 Main St','Cupertino','CA','95014',NULL,'2024-11-30 00:00:00'),(7,'Jason','Edward','Miller',NULL,'BreachAlarm','jason.miller@sjsu.edu','408-555-7890',NULL,NULL,NULL,NULL,'1993-12-01 00:00:00','2025-03-05 00:00:00'),(8,'Kevin',NULL,'Murphy',NULL,'HaveIBeenPwned','kevin.murphy@sjsu.edu',NULL,NULL,NULL,NULL,NULL,NULL,'2025-06-01 00:00:00'),(9,'Lily',NULL,'Davis',NULL,'DeHashed',NULL,'408-555-9012','159 Broadway','Oakland','CA','94607',NULL,'2025-04-22 00:00:00'),(10,'Michael','Quan','Tan','Mike','BreachAlarm',NULL,'408-555-0123',NULL,'Berkeley','CA',NULL,NULL,'2024-08-19 00:00:00');
+INSERT INTO `Breach_Details` VALUES (1,1,'AntiPublic','2016-12-16','Email addresses, Passwords'),(2,1,'Apollo','2018-07-23','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Salutations, Social media profiles'),(3,1,'LiveJournal','2017-01-01','Email addresses, Passwords, Usernames'),(4,2,'AntiPublic','2016-12-16','Email addresses, Passwords'),(5,2,'Apollo','2018-07-23','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Salutations, Social media profiles'),(6,2,'LiveJournal','2017-01-01','Email addresses, Passwords, Usernames');
 /*!40000 ALTER TABLE `Breach_Details` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Breach_Report`
---
-
-DROP TABLE IF EXISTS `Breach_Report`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Breach_Report` (
-  `report_id` int NOT NULL AUTO_INCREMENT,
-  `pii_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`report_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Breach_Report`
---
-
-LOCK TABLES `Breach_Report` WRITE;
-/*!40000 ALTER TABLE `Breach_Report` DISABLE KEYS */;
-INSERT INTO `Breach_Report` VALUES (1,1,4),(2,2,5),(3,3,6),(4,4,7),(5,5,8),(6,6,9),(7,7,10),(8,8,18),(9,9,19),(10,10,20);
-/*!40000 ALTER TABLE `Breach_Report` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -219,9 +185,10 @@ CREATE TABLE `Scan` (
   `scan_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `pii_id` int NOT NULL,
-  `status` enum('Completed','Error') NOT NULL,
+  `status` enum('Completed','Error') NOT NULL DEFAULT 'Completed',
+  `scan_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`scan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +197,7 @@ CREATE TABLE `Scan` (
 
 LOCK TABLES `Scan` WRITE;
 /*!40000 ALTER TABLE `Scan` DISABLE KEYS */;
-INSERT INTO `Scan` VALUES (1,4,1,'Completed'),(2,5,2,'Error'),(3,5,2,'Completed'),(4,6,3,'Completed'),(5,7,4,'Completed'),(6,8,5,'Completed'),(7,9,6,'Completed'),(8,10,7,'Completed'),(9,18,8,'Completed'),(10,19,9,'Completed'),(11,20,10,'Completed');
+INSERT INTO `Scan` VALUES (1,25,14,'Completed','2025-08-01 16:56:28'),(2,25,14,'Completed','2025-08-01 18:03:37');
 /*!40000 ALTER TABLE `Scan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-01 14:05:55
+-- Dump completed on 2025-08-01 18:11:04
