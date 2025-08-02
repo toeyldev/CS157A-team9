@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 
@@ -25,7 +26,7 @@
       <table class="breach-report-table">
         <thead>
         <tr>
-          <th>Scan #</th>
+          <th>ScanID</th>
           <th>Date</th>
           <th>Status</th>
           <th>View</th>
@@ -35,7 +36,7 @@
         <c:forEach var="s" items="${scans}">
           <tr>
             <td>${s.scanId}</td>
-            <td>${s.scanTime}</td>
+            <td><fmt:formatDate value="${s.scanTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
             <td>${s.status}</td>
             <td>
               <a href="${pageContext.request.contextPath}/report?scanId=${s.scanId}">
@@ -47,9 +48,12 @@
         </tbody>
       </table>
     </c:if>
+
+    <div class="scan-button-container">
+      <a href="${pageContext.request.contextPath}/initiate_scan" class="button-link">Initiate New Scan</a>
+    </div>
   </div>
 
-    <p><a href="${pageContext.request.contextPath}/initiate_scan">Run new scan</a></p>
 </body>
 
 </html>

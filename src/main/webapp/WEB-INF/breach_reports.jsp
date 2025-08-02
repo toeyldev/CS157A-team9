@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Breach Reports</title>
+    <title>My Breach Report</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/breachreport.css"/>
 </head>
 
@@ -14,7 +14,7 @@
     </div>
 
     <div class="container">
-        <h1>My Breach Reports</h1>
+        <h1>Breach Report</h1>
 
         <table class="breach-report-table">
             <thead>
@@ -45,13 +45,12 @@
                                 <c:if test="${!status.last}">, </c:if>
                             </c:forEach>
                         </td>
-                        <%-- Exposed data type --%>
+                        <%-- Exposed date --%>
                         <td><c:out value="${b.breachDate}"/></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-
 
         <h2>Mitigation Guide</h2>
 
