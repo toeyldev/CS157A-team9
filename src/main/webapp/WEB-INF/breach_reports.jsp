@@ -17,6 +17,8 @@
         <div class="print-area">
         <h1>Breach Report</h1>
 
+        <p><strong>Scan ID:</strong> ${scanId}</p>
+
         <table class="breach-report-table">
             <thead>
                 <tr>
