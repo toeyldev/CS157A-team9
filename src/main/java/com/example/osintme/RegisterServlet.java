@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
 
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
-            
+
             // Update query to create an email + password in User table
             String registerSql = "INSERT INTO osintme.User (email, password) VALUES (?, ?)";
             PreparedStatement prepare = connection.prepareStatement(registerSql);
@@ -50,37 +50,54 @@ public class RegisterServlet extends HttpServlet {
             prepare.setString(2, password);
             int affectedRows = prepare.executeUpdate();
 
+            // Update query to create an empty row in Location table related to the user_id
             if (affectedRows > 0) {
-                // Update query to add first_name to PII table
-                registerSql = "INSERT INTO osintme.Personal_Information (user_id, first_name, last_name, phone) VALUES ((SELECT user_id FROM osintme.User WHERE email = ?), ?, '', '')";
-                prepare = connection.prepareStatement(registerSql);
-                prepare.setString(1, email);
-                prepare.setString(2, first_name);
+                registerSql = "INSERT INTO osintme.Location (address, city, state, zip_code) VALUES ('', '', '', '')";
+                prepare = connection.prepareStatement(registerSql, Statement.RETURN_GENERATED_KEYS);
                 affectedRows = prepare.executeUpdate();
 
-                // User created, unique user_id made automatically by the db, redirect to UserDashboardServlet.java
+                ResultSet result = prepare.getGeneratedKeys();
+                int address_id = -1;
+                if (result.next()) {
+                    address_id = result.getInt(1);
+                }
+
+                prepare.close();
+                result.close();
                 if (affectedRows > 0) {
-                    // Query to check if email + password in Users table
-                    registerSql = "SELECT * FROM User WHERE email = ? AND password = ?";
+                    // Update query to add first_name to PII table
+                    registerSql = "INSERT INTO osintme.Personal_Information (user_id, first_name, last_name, phone, address_id) VALUES ((SELECT user_id FROM osintme.User WHERE email = ?), ?, '', '', ?)";
                     prepare = connection.prepareStatement(registerSql);
                     prepare.setString(1, email);
-                    prepare.setString(2, password);
-                    ResultSet result = prepare.executeQuery();
+                    prepare.setString(2, first_name);
+                    prepare.setInt(3, address_id);
+                    affectedRows = prepare.executeUpdate();
 
-                    // Redirects user if result is returned
-                    if (result.next()) {
-                        int userId = result.getInt("user_id");
-                        session.setAttribute("userId", userId);
-                        response.sendRedirect(request.getContextPath() + "/dashboard");
+                    prepare.close();
+                    // User created, unique user_id made automatically by the db
+                    if (affectedRows > 0) {
+                        // Query to check if email + password in Users table
+                        registerSql = "SELECT * FROM User WHERE email = ? AND password = ?";
+                        prepare = connection.prepareStatement(registerSql);
+                        prepare.setString(1, email);
+                        prepare.setString(2, password);
+                        result = prepare.executeQuery();
+
+                        // Redirects user to UserDashboardServlet.java if result is returned
+                        if (result.next()) {
+                            int userId = result.getInt("user_id");
+                            session.setAttribute("userId", userId);
+                            response.sendRedirect(request.getContextPath() + "/dashboard");
+                        }
+                        result.close();
+                        prepare.close();
                     }
-                    result.close();
                 }
             }
             // DELETE FROM osintme.Personal_Information WHERE pii_id = 11
             // DELETE FROM osintme.User WHERE user_id = 21
 
             // Close connection
-            prepare.close();
             connection.close();
         }
         catch (Exception e) {

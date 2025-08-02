@@ -21,8 +21,8 @@ public class LoadSettingsServlet extends HttpServlet {
             // Gets user ID from the session
             int userId = (Integer) session.getAttribute("userId");
 
-            String first_name, middle_name, last_name, address, state, zip_code, city, phone, birthday, email, nickname;
-            first_name = middle_name = last_name = address = state = zip_code = city = phone = birthday = email = nickname = "";
+            String first_name, middle_name, last_name, address, state, zip_code, city, phone, birthday, email, nickname, password;
+            first_name = middle_name = last_name = address = state = zip_code = city = phone = birthday = email = nickname = password = "";
 
             String firstNameSql = "SELECT first_name FROM osintme.Personal_Information WHERE user_id = ?";
             String middleNameSql = "SELECT middle_name FROM osintme.Personal_Information WHERE user_id = ?";
@@ -35,6 +35,7 @@ public class LoadSettingsServlet extends HttpServlet {
             String birthdaySql = "SELECT birthday FROM osintme.Personal_Information WHERE user_id = ?";
             String emailSql = "SELECT email FROM osintme.User WHERE user_id = ?";
             String nicknameSql = "SELECT nickname FROM osintme.Personal_Information WHERE user_id = ?";
+            String passwordSql = "SELECT password FROM osintme.User WHERE user_id = ?";
 
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
@@ -128,6 +129,14 @@ public class LoadSettingsServlet extends HttpServlet {
             if (result.next()) {
                 nickname = result.getString("nickname");
                 request.setAttribute("nickname", nickname);
+            }
+
+            prepare = connection.prepareStatement(passwordSql);
+            prepare.setInt(1, userId);
+            result = prepare.executeQuery();
+            if (result.next()) {
+                password = result.getString("password");
+                request.setAttribute("password", password);
             }
 
             // Close connection

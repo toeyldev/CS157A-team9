@@ -11,10 +11,35 @@
     </a>
   </div>
 
+  <form
+    action="${pageContext.request.contextPath}/delete-account-servlet"
+    method="post"
+    style="gap: 0rem"
+    onsubmit="return confirm('Are you sure you want to delete your account?');"
+  >
+    <button
+      type="submit"
+      style="
+        background: rgb(255, 75, 75);
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        max-width: 200px;
+      "
+    >
+      Delete Account
+    </button>
+  </form>
+
   <body>
     <div class="container">
       <h2>Your Settings</h2>
 
+      <% String error = (String) request.getAttribute("error"); %> <% if (error
+      != null) { %>
+        <div style="color: red"><%= error %></div>
+      <% } %>
       <form
         method="post"
         action="${pageContext.request.contextPath}/update-settings-servlet"
@@ -138,6 +163,17 @@
               name="nickname"
               value="${nickname}"
               placeholder="Nickname"
+            />
+          </div>
+
+          <div>
+            <label for="password">Password</label>
+            <input
+              type="text"
+              id="password"
+              name="password"
+              value="${password}"
+              placeholder="Password"
             />
           </div>
         </div>
