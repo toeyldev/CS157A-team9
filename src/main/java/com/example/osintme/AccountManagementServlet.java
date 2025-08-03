@@ -42,7 +42,7 @@ public class AccountManagementServlet extends HttpServlet {
 
             // Extract data from result set
             while (rs.next()) {
-                // Retrieve by column name
+                // Retrieve by column
                 int userId = rs.getInt("user_id");
                 String email = rs.getString("email");
                 String status = rs.getString("status");
