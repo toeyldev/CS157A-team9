@@ -14,7 +14,10 @@
     </div>
 
     <div class="container">
+        <div class="print-area">
         <h1>Breach Report</h1>
+
+        <p><strong>Scan ID:</strong> ${scanId}</p>
 
         <table class="breach-report-table">
             <thead>
@@ -29,7 +32,7 @@
                 <c:if test="${empty breachList}">
                     <tr>
                         <td colspan="3" style="text-align:center; font-style:italic;">
-                            No breach results found."/>.
+                            No breach results found.
                         </td>
                     </tr>
                 </c:if>
@@ -51,6 +54,11 @@
                 </c:forEach>
             </tbody>
         </table>
+        </div>
+
+        <div class="save-pdf-button-container">
+            <button onclick="window.print()" class="button-link">Save as PDF</button>
+        </div>
 
         <h2>Mitigation Guide</h2>
 
@@ -63,7 +71,6 @@
             <option value="address">Physical Address</option>
             <option value="ssn">Birthday</option>
         </select>
-        </div>
     </div>
 </body>
 </html>

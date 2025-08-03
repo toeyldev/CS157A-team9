@@ -45,6 +45,7 @@ public class ViewReportServlet extends HttpServlet {
             }
 
             req.setAttribute("breachList", breaches);
+            req.setAttribute("scanId", scanId);
             req.getRequestDispatcher("/WEB-INF/breach_reports.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
