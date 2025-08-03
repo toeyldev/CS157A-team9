@@ -94,7 +94,7 @@
                     <h2>User Management</h2>
                     <button class="btn btn-primary" onclick="openAddUserModal()">
                         <span class="btn-icon">➕</span>
-                        Add New Admin
+                        Add New User
                     </button>
                 </div>
 
@@ -119,13 +119,22 @@
                             <tr>
                                 <th>User ID</th>
                                 <th>Email</th>
-                                <th>Name</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="users-table-body">
-                            <! -- figure out how to pull from workbench to populate table with users here -->
+                            <c:forEach var="user" items="${userList}">
+                                   <tr>
+                                       <td><c:out value="${user.userId}"/></td>
+                                       <td><c:out value="${user.email}"/></td>
+                                       <td><c:out value="${user.status}"/></td>
+                                       <td>
+                                           <button class="btn btn-secondary">Edit</button>
+                                           <button class="btn btn-danger">Delete</button>
+                                       </td>
+                                   </tr>
+                               </c:forEach>
                         </tbody>
                     </table>
                 </div>
