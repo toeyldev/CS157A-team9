@@ -22,7 +22,7 @@
       style="
         background: rgb(255, 75, 75);
         position: absolute;
-        top: 20px;
+        top: 10px;
         right: 20px;
         padding: 10px;
         max-width: 200px;
@@ -34,7 +34,7 @@
 
   <body>
     <div class="container">
-      <h2>Your Settings</h2>
+      <h2>Your Settings ⛭</h2>
 
       <% String error = (String) request.getAttribute("error"); %> <% if (error
       != null) { %>
