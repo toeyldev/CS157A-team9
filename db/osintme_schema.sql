@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: osintme
 -- ------------------------------------------------------
--- Server version	8.0.42-0ubuntu0.22.04.1
+-- Server version	8.0.42-0ubuntu0.22.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,11 +23,10 @@ DROP TABLE IF EXISTS `Action`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Action` (
-  `action_id` int NOT NULL AUTO_INCREMENT,
-  `log_id` int NOT NULL,
-  `description` enum('Update User Info','Deactivate User','Update Password','Add User','Password Reset') NOT NULL,
+  `action_id` int NOT NULL,
+  `action_name` varchar(100) NOT NULL,
   PRIMARY KEY (`action_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +35,7 @@ CREATE TABLE `Action` (
 
 LOCK TABLES `Action` WRITE;
 /*!40000 ALTER TABLE `Action` DISABLE KEYS */;
-INSERT INTO `Action` VALUES (1,1,'Add User'),(2,2,'Password Reset'),(3,3,'Update Password'),(4,4,'Update User Info'),(5,5,'Deactivate User'),(6,6,'Password Reset'),(7,7,'Add User'),(8,8,'Update Password'),(9,9,'Deactivate User'),(10,10,'Update User Info');
+INSERT INTO `Action` VALUES (1,'Add user'),(2,'Delete user'),(3,'Edit user information');
 /*!40000 ALTER TABLE `Action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,10 +48,11 @@ DROP TABLE IF EXISTS `Activity_Log`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Activity_Log` (
   `log_id` int NOT NULL AUTO_INCREMENT,
-  `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL,
+  `action_id` int NOT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,6 @@ CREATE TABLE `Activity_Log` (
 
 LOCK TABLES `Activity_Log` WRITE;
 /*!40000 ALTER TABLE `Activity_Log` DISABLE KEYS */;
-INSERT INTO `Activity_Log` VALUES (1,'2025-07-08 00:37:47',3),(2,'2025-07-08 00:37:47',7),(3,'2025-07-08 00:37:47',10),(4,'2025-07-08 00:37:47',13),(5,'2025-07-08 00:37:47',16),(6,'2025-07-08 00:37:47',19),(7,'2025-07-08 00:37:47',2),(8,'2025-07-08 00:37:47',5),(9,'2025-07-08 00:37:47',12),(10,'2025-07-08 00:37:47',14);
 /*!40000 ALTER TABLE `Activity_Log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +78,7 @@ CREATE TABLE `Breach_Details` (
   `breach_date` date NOT NULL,
   `data_leaked` text NOT NULL,
   PRIMARY KEY (`detail_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +87,7 @@ CREATE TABLE `Breach_Details` (
 
 LOCK TABLES `Breach_Details` WRITE;
 /*!40000 ALTER TABLE `Breach_Details` DISABLE KEYS */;
-INSERT INTO `Breach_Details` VALUES (1,1,'AntiPublic','2016-12-16','Email addresses, Passwords'),(2,1,'Apollo','2018-07-23','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Salutations, Social media profiles'),(3,1,'LiveJournal','2017-01-01','Email addresses, Passwords, Usernames'),(4,2,'AntiPublic','2016-12-16','Email addresses, Passwords'),(5,2,'Apollo','2018-07-23','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Salutations, Social media profiles'),(6,2,'LiveJournal','2017-01-01','Email addresses, Passwords, Usernames');
+INSERT INTO `Breach_Details` VALUES (1,1,'AntiPublic','2016-12-16','Email addresses, Passwords'),(2,1,'Apollo','2018-07-23','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Salutations, Social media profiles'),(3,1,'LiveJournal','2017-01-01','Email addresses, Passwords, Usernames'),(4,2,'AntiPublic','2016-12-16','Email addresses, Passwords'),(5,2,'Apollo','2018-07-23','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Salutations, Social media profiles'),(6,2,'LiveJournal','2017-01-01','Email addresses, Passwords, Usernames'),(7,3,'RiverCityMedia','2017-01-01','Email addresses, IP addresses, Names, Physical addresses'),(8,3,'OnlinerSpambot','2017-08-28','Email addresses, Passwords'),(9,3,'NemoWeb','2016-09-04','Email addresses, Names'),(10,3,'VerificationsIO','2019-02-25','Dates of birth, Email addresses, Employers, Genders, Geographic locations, IP addresses, Job titles, Names, Phone numbers, Physical addresses'),(11,3,'PDL','2019-10-16','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Social media profiles'),(12,4,'RiverCityMedia','2017-01-01','Email addresses, IP addresses, Names, Physical addresses'),(13,4,'OnlinerSpambot','2017-08-28','Email addresses, Passwords'),(14,4,'NemoWeb','2016-09-04','Email addresses, Names'),(15,4,'VerificationsIO','2019-02-25','Dates of birth, Email addresses, Employers, Genders, Geographic locations, IP addresses, Job titles, Names, Phone numbers, Physical addresses'),(16,4,'PDL','2019-10-16','Email addresses, Employers, Geographic locations, Job titles, Names, Phone numbers, Social media profiles');
 /*!40000 ALTER TABLE `Breach_Details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +105,7 @@ CREATE TABLE `Location` (
   `state` varchar(45) NOT NULL,
   `zip_code` varchar(20) NOT NULL,
   PRIMARY KEY (`address_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +187,7 @@ CREATE TABLE `Scan` (
   `status` enum('Completed','Error') NOT NULL DEFAULT 'Completed',
   `scan_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`scan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +196,7 @@ CREATE TABLE `Scan` (
 
 LOCK TABLES `Scan` WRITE;
 /*!40000 ALTER TABLE `Scan` DISABLE KEYS */;
-INSERT INTO `Scan` VALUES (1,25,14,'Completed','2025-08-01 16:56:28'),(2,25,14,'Completed','2025-08-01 18:03:37');
+INSERT INTO `Scan` VALUES (1,25,14,'Completed','2025-08-01 16:56:28'),(2,25,14,'Completed','2025-08-01 18:03:37'),(3,22,11,'Completed','2025-08-04 11:52:30'),(4,22,11,'Completed','2025-08-04 12:57:12');
 /*!40000 ALTER TABLE `Scan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +241,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,32 +250,8 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'toey.lui@sjsu.edu','29nSl3ns04','2025-07-08 00:06:45','Active','Admin'),(2,'patrick.luong@sjsu.edu','3n!*2nfkl3','2025-07-08 00:06:45','Active','Admin'),(3,'victor.le@sjsu.edu','C@2kjf3l!0','2025-07-08 00:06:45','Active','Admin'),(4,'david.chen@sjsu.edu','Dav1dCh3n','2025-07-08 00:06:45','Active','User'),(5,'emily.lopez@sjsu.edu','Emp0WeR2','2025-07-08 00:06:45','Active','User'),(6,'frank.liu@sjsu.edu','Fr4nkl!u','2025-07-08 00:06:45','Active','User'),(7,'grace.khan@sjsu.edu','Gr8c3Kh@n','2025-07-08 00:06:45','Active','User'),(8,'henry.zhang@sjsu.edu','H3nryZh@ng','2025-07-08 00:06:45','Active','User'),(9,'isabel.anderson@sjsu.edu','Is@B3lAn','2025-07-08 00:06:45','Active','User'),(10,'jason.miller@sjsu.edu','Ja5onM!ll','2025-07-08 00:06:45','Active','User'),(11,'alex.johnson@sjsu.edu','Al3xJ0hn!','2025-07-08 00:21:38','Active','Admin'),(12,'brenda.smith@sjsu.edu','Br3nd@$m!','2025-07-08 00:21:38','Active','Admin'),(13,'charles.lee@sjsu.edu','Ch4rl3sL#e','2025-07-08 00:21:38','Active','Admin'),(14,'dorothy.kim@sjsu.edu','D0r0thyK!m','2025-07-08 00:21:38','Active','Admin'),(15,'ethan.ross@sjsu.edu','3th@nR0ss','2025-07-08 00:21:38','Active','Admin'),(16,'fiona.cho@sjsu.edu','F1on@Ch0','2025-07-08 00:21:38','Active','Admin'),(17,'gabriel.park@sjsu.edu','G@br1elP4rk','2025-07-08 00:21:38','Active','Admin'),(18,'kevin.murphy@sjsu.edu','K3v1nM!p','2025-07-08 00:21:38','Active','User'),(19,'lily.davis@sjsu.edu','L1lyDav1s!','2025-07-08 00:21:38','Active','User'),(20,'michael.tan@sjsu.edu','M1chaelT@#','2025-07-08 00:21:38','Active','User'),(22,'alice@example.org','Al1c3lov3Sic3cr3am','2025-07-30 20:17:52','Active','User'),(23,'demo@fake.com','A7!x9#Qw2Rt%Vb6','2025-08-01 13:58:26','Active','User'),(24,'hello@demo.com','Zk3$Lp8&Yt5@Wq1n','2025-08-01 13:58:26','Active','User'),(25,'bob@testmail.com','M4^Jn6*Rc9!Vk2@z','2025-08-01 13:58:26','Active','User');
+INSERT INTO `User` VALUES (1,'toey.lui@sjsu.edu','29nSl3ns04','2025-07-08 00:06:45','Active','Admin'),(2,'patrick.luong@sjsu.edu','3n!*2nfkl3','2025-07-08 00:06:45','Active','Admin'),(3,'victor.le@sjsu.edu','C@2kjf3l!0','2025-07-08 00:06:45','Active','Admin'),(4,'david.chen@sjsu.edu','Dav1dCh3n','2025-07-08 00:06:45','Active','User'),(5,'emily.lopez@sjsu.edu','Emp0WeR2','2025-07-08 00:06:45','Active','User'),(6,'frank.liu@sjsu.edu','Fr4nkl!u','2025-07-08 00:06:45','Active','User'),(7,'grace.khan@sjsu.edu','Gr8c3Kh@n','2025-07-08 00:06:45','Active','User'),(8,'henry.zhang@sjsu.edu','H3nryZh@ng','2025-07-08 00:06:45','Active','User'),(9,'isabel.anderson@sjsu.edu','Is@B3lAn','2025-07-08 00:06:45','Active','User'),(10,'jason.miller@sjsu.edu','Ja5onM!ll','2025-07-08 00:06:45','Active','User'),(11,'alex.johnson@sjsu.edu','Al3xJ0hn!','2025-07-08 00:21:38','Active','Admin'),(12,'brenda.smith@sjsu.edu','Br3nd@$m!','2025-07-08 00:21:38','Active','Admin'),(13,'charles.lee@sjsu.edu','Ch4rl3sL#e','2025-07-08 00:21:38','Active','Admin'),(14,'dorothy.kim@sjsu.edu','D0r0thyK!m','2025-07-08 00:21:38','Active','Admin'),(15,'ethan.ross@sjsu.edu','3th@nR0ss','2025-07-08 00:21:38','Active','Admin'),(16,'fiona.cho@sjsu.edu','F1on@Ch0','2025-07-08 00:21:38','Active','Admin'),(17,'gabriel.park@sjsu.edu','G@br1elP4rk','2025-07-08 00:21:38','Active','Admin'),(18,'kevin.murphy@sjsu.edu','K3v1nM!p','2025-07-08 00:21:38','Active','User'),(19,'lily.davis@sjsu.edu','L1lyDav1s!','2025-07-08 00:21:38','Active','User'),(20,'michael.tan@sjsu.edu','M1chaelT@#','2025-07-08 00:21:38','Active','User'),(22,'alice@example.org','Al1c3lov3Sic3cr3am','2025-07-30 20:17:52','Active','User'),(23,'demo@fake.com','A7!x9#Qw2Rt%Vb6','2025-08-01 13:58:26','Active','User'),(24,'hello@demo.com','Zk3$Lp8&Yt5@Wq1n','2025-08-01 13:58:26','Active','User'),(25,'bob@testmail.com','M4^Jn6*Rc9!Vk2@z','2025-08-01 13:58:26','Active','User'),(26,'hello@gmail.com','123','2025-08-04 14:42:22','Active','User'),(27,'abc@gmail.com','q3j2j','2025-08-04 15:11:22','Active','User');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `has`
---
-
-DROP TABLE IF EXISTS `has`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `has` (
-  `report_id` int NOT NULL,
-  `breach_flag` enum('True','False') NOT NULL,
-  PRIMARY KEY (`report_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `has`
---
-
-LOCK TABLES `has` WRITE;
-/*!40000 ALTER TABLE `has` DISABLE KEYS */;
-INSERT INTO `has` VALUES (1,'True'),(2,'True'),(3,'True'),(4,'True'),(5,'True'),(6,'True'),(7,'True'),(8,'True'),(9,'True'),(10,'True');
-/*!40000 ALTER TABLE `has` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -288,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-01 18:11:04
+-- Dump completed on 2025-08-04 15:36:42
