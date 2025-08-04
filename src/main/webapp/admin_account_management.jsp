@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="login" class="nav-link logout">
+                    <a href="${pageContext.request.contextPath}/signin.jsp" class="nav-link logout">
                         <span class="nav-icon">🚪</span>
                         Logout
                     </a>

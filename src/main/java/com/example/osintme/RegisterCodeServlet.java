@@ -23,6 +23,8 @@ public class RegisterCodeServlet extends HttpServlet {
                 return;
             }
 
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
             // Get parameters from register.jsp
             String first_name = request.getParameter("first_name");
             String email = request.getParameter("email").trim();

@@ -80,7 +80,7 @@ public class AddAccountServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("/admin-dashboard").forward(request, response);
         // response.sendRedirect(request.getContextPath() + "/admin-dashboard"); //lead back to admin dashboard for a refresh
+        response.sendRedirect(request.getContextPath() + "/admin-dashboard");
     }
 }

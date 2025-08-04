@@ -15,6 +15,7 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             // Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Connection to MySQL
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
@@ -52,9 +53,9 @@ public class LoginServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            // request.setAttribute("error", "Error occured: " + e.getMessage());
+            request.setAttribute("error", "Error occured: " + e.getMessage());
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
-            request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
+            // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }
 }

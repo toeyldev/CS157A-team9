@@ -23,6 +23,8 @@ public class ForgotCodeServlet extends HttpServlet {
                 return;
             }
 
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
             // Get parameters from forgot_password.jsp
             String email = request.getParameter("email").trim();
 
