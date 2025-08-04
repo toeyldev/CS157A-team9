@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(name = "DeleteAccountServlet", value = "/account-management-servlet")
+@WebServlet(name = "AccountManagementServlet", value = "/account-management-servlet")
 public class AccountManagementServlet extends HttpServlet {
 
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/osintme";
     private static final String USER = "root"; // Replace with your MySQL username
-    private static final String PASS = "yourPassword"; // Replace with your MySQL password
+    private static final String PASS = "or08le49"; // Replace with your MySQL password
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = new ArrayList<>();
@@ -29,15 +29,13 @@ public class AccountManagementServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            // Register JDBC driver /
+
             Class.forName(JDBC_DRIVER);
 
-            // Open a connection
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            // Execute a query
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT user_id, email,status FROM osintme.user"; // Replace with your actual table and column names
+            String sql = "SELECT user_id, email,status FROM osintme.user";
             rs = stmt.executeQuery(sql);
 
             // Extract data from result set
@@ -56,16 +54,21 @@ public class AccountManagementServlet extends HttpServlet {
             request.setAttribute("userList", users);
 
             // Forward the request to JSP page
-            request.getRequestDispatcher("/WEB-INF/jsp/admin_account_management.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin_account_management.jsp").forward(request, response);
 
-        } catch (SQLException se) {
+        }
+
+        catch (SQLException se) {
             se.printStackTrace();
             throw new ServletException("Database access error", se);
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
             throw new ServletException("An error occurred", e);
 
-        } finally {
+        }
+        finally {
             // Close resources
             try { if (rs != null) rs.close(); } catch (SQLException se2) {}
             try { if (stmt != null) stmt.close(); } catch (SQLException se2) {}

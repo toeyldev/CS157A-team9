@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Account Management - OSINTMe</title>
@@ -96,20 +97,6 @@
                         <span class="btn-icon">➕</span>
                         Add New User
                     </button>
-                </div>
-
-                <!-- Search and Filter -->
-                <div class="search-filter">
-                    <div class="search-box">
-                        <input type="text" id="user-search" placeholder="Search users..." onkeyup="filterUsers()">
-                        <span class="search-icon">🔍</span>
-                    </div>
-                    <select id="status-filter" onchange="filterUsers()">
-                        <option value="">All Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="breached">Breached</option>
-                    </select>
                 </div>
 
                 <!-- Users Table -->

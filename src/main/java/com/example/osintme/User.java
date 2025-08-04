@@ -2,9 +2,9 @@ package com.example.osintme;
 
 
 public class User {
-    private int userId;
-    private String email;
-    private String status;
+    private final int userId;
+    private final String email;
+    private final String status;
 
     public User(int userId, String email, String status) {
         this.userId = userId;
