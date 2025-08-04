@@ -60,17 +60,22 @@
             <button onclick="window.print()" class="button-link">Save as PDF</button>
         </div>
 
-        <h2>Mitigation Guide</h2>
+        <br>
 
-        <label for="dataTypeSelect"><strong>Select Exposed Data Type:</strong></label>
-        <select id="dataTypeSelect" onchange="updateMitigationGuide()">
-            <option value="">-Choose a data type-</option>
-            <option value="email">Email</option>
-            <option value="password">Password</option>
-            <option value="phone">Phone Number</option>
-            <option value="address">Physical Address</option>
-            <option value="ssn">Birthday</option>
-        </select>
+        <%-- Mitigation Guide --%>
+        <c:if test="${not empty mitigationMap}">
+            <h2>Mitigation Guide</h2>
+            <c:forEach var="entry" items="${mitigationMap}">
+                <div class="mitigation-box">
+                    <h3><c:out value="${entry.key}"/></h3>
+                    <ul>
+                        <c:forEach var="step" items="${entry.value}">
+                            <li><c:out value="${step}"/></li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </c:forEach>
+        </c:if>
     </div>
 </body>
 </html>

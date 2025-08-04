@@ -98,19 +98,33 @@ h2 {
     text-align: left;
 }
 
-#dataTypeSelect {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background: white;
-    margin: 12px 0 20px;
-    transition: box-shadow 0.2s, border-color 0.2s;
+.mitigation-box {
+    background-color: #e6f2ff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #cce4ff;
+    transition:
+            background 0.3s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-#dataTypeSelect:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-    outline: none;
+.mitigation-box h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #1a3d7c;
+}
+
+.mitigation-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.mitigation-box:hover {
+    background: linear-gradient(135deg, #f0f7ff, #e6fff, #e6f2ff);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
 }
