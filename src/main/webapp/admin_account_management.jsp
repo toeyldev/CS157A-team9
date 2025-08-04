@@ -62,28 +62,28 @@
                 <div class="stat-card">
                     <div class="stat-icon">👥</div>
                     <div class="stat-info">
-                        <h3 id="total-users">0</h3>
+                        <h3 id="total-users">${totalUsers}</h3>
                         <p>Total Users</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">✅</div>
                     <div class="stat-info">
-                        <h3 id="active-users">0</h3>
+                        <h3 id="active-users">${activeUsers}</h3>
                         <p>Active Users</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">⚠️</div>
                     <div class="stat-info">
-                        <h3 id="breached-accounts">0</h3>
+                        <h3 id="breached-accounts">${breachedUsers}</h3>
                         <p>Breached Accounts</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">🔒</div>
                     <div class="stat-info">
-                        <h3 id="secure-accounts">0</h3>
+                        <h3 id="secure-accounts">${secureAccounts}</h3>
                         <p>Secure Accounts</p>
                     </div>
                 </div>

@@ -28,11 +28,12 @@ public class AccountManagementServlet extends HttpServlet {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        int breachedCount= 0;
+        int activeCount= 0;
+
         try {
 
             Class.forName(JDBC_DRIVER);
-
-
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             String sql = "SELECT user_id, email,status FROM osintme.user";
@@ -49,9 +50,50 @@ public class AccountManagementServlet extends HttpServlet {
                 User user = new User(userId, email, status);
                 users.add(user);
             }
-
             // Set the list of users as an attribute in the request object
-            request.setAttribute("userList", users);
+            request.setAttribute("userList", users);  //END OF FIRST QUERY
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close(); // close statement and results
+
+            //QUERY 2 Populate total users stat card
+            stmt = conn.createStatement();
+            String sqlTotalUsers = "SELECT COUNT(*) AS total FROM osintme.user";
+            rs= stmt.executeQuery(sqlTotalUsers);
+            if (rs.next()) {
+                request.setAttribute("totalUsers", rs.getInt("total"));
+            }
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+
+            //QUERY 3 Populate the active users stat card
+            stmt = conn.createStatement();
+            String sqlActiveUsers = "SELECT COUNT(*) AS active FROM osintme.user WHERE STATUS = 'Active' ";
+            rs= stmt.executeQuery(sqlActiveUsers);
+            if (rs.next()) {
+                request.setAttribute("activeUsers", rs.getInt("active"));
+                activeCount = rs.getInt("active");
+            }
+
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+
+            //QUERY 4 Get unique users in scan table to see who's breached
+            stmt = conn.createStatement();
+            String sqlBreachedUsers = "SELECT COUNT(DISTINCT user_id) AS breached FROM osintme.scan";
+            rs= stmt.executeQuery(sqlBreachedUsers);
+            if (rs.next()) {
+                request.setAttribute("breachedUsers", rs.getInt("breached"));
+                breachedCount = rs.getInt("breached");
+            }
+
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+
+            int secureCount = activeCount - breachedCount;
+            request.setAttribute("secureAccounts", secureCount );
+
+
+
 
             // Forward the request to JSP page
             request.getRequestDispatcher("/admin_account_management.jsp").forward(request, response);
