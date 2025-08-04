@@ -19,7 +19,6 @@
 
 <div class="dashboard-buttons">
   <a href="${pageContext.request.contextPath}/admin_account_management.jsp" class="button-link">User Account Management</a>
-  <a href="${pageContext.request.contextPath}/system_metrics.jsp" class="button-link">System Metrics</a>
 </div>
 </body>
 

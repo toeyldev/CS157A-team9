@@ -128,8 +128,72 @@
             </div>
         </div>
 
+<!--ADDING NEW USER EVENT -->
 
+ <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New User</h2>
+                <span class="close-btn" onclick="closeAddUserModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- The form that submits to the servlet -->
+                <form action="${pageContext.request.contextPath}/add-account-servlet" method="post">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="privilege">Privilege</label>
+                        <select id="privilege" name="privilege" required>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Create User</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-  <!-- Figure out how to implement CRUD with servlets, this is just front end for now -->
+<script>
+    // Javascript for the add new user modal
+
+    // Get the modal
+    const modal = document.getElementById("addUserModal");
+
+    // Function to open the modal
+    function openAddUserModal() {
+        modal.style.display = "block";
+    }
+
+    // Function to close the modal
+    function closeAddUserModal() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal when the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            closeAddUserModal();
+        }
+    }
+</script>
+
+  <!-- Figure out how to implement CRUD with servlets, this is just front end for now so far (ADD IS COMPLETE)  -->
 </body>
 </html>

@@ -24,6 +24,7 @@ public class AccountManagementServlet extends HttpServlet {
     private static final String PASS = "or08le49"; // Replace with your MySQL password
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<User> users = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
