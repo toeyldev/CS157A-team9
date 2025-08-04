@@ -41,9 +41,9 @@ public class AddAccountServlet extends HttpServlet {
 
         try {
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "or08le49");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
-            String insertUserSql = "INSERT INTO osintme.user (email, password, status, privilege) VALUES (?, ?, ?, ?)";
+            String insertUserSql = "INSERT INTO osintme.User (email, password, status, privilege) VALUES (?, ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(insertUserSql);
             preparedStatement.setString(1, email);
@@ -72,12 +72,15 @@ public class AddAccountServlet extends HttpServlet {
         } finally {
             // Close database resources in a finally block to ensure they are always closed
             try {
-                if (preparedStatement != null) preparedStatement.close();
-                if (connection != null) connection.close();
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                if (connection != null)
+                    connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        response.sendRedirect(request.getContextPath() + "/admin-dashboard"); //lead back to admin dashboard for a refresh
+        request.getRequestDispatcher("/admin-dashboard").forward(request, response);
+        // response.sendRedirect(request.getContextPath() + "/admin-dashboard"); //lead back to admin dashboard for a refresh
     }
 }

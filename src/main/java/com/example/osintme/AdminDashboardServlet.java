@@ -18,6 +18,9 @@ public class AdminDashboardServlet extends HttpServlet {
 
         int userId = (Integer) session.getAttribute("userId");
         request.setAttribute("userId", userId);
-        response.sendRedirect(request.getContextPath() + "/account-management-servlet"); //UPDATING PATH FOR CLEARER REQUEST PIPELINE
+        // request.getRequestDispatcher("/WEB-INF/admin_dashboard.jsp").forward(request, response);
+        // response.sendRedirect(request.getContextPath() + "/account-management-servlet"); //UPDATING PATH FOR CLEARER REQUEST PIPELINE
+        // request.getRequestDispatcher(request.getContextPath() + "/account-management-servlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/account-management-servlet");
     }
 }

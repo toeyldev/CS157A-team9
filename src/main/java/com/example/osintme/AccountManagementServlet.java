@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(name = "AccountManagementServlet", value = "/account-management-servlet")
+@WebServlet(name = "AccountManagementServlet", urlPatterns = {"/account-management-servlet"})
 public class AccountManagementServlet extends HttpServlet {
 
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/osintme";
     private static final String USER = "root"; // Replace with your MySQL username
-    private static final String PASS = "or08le49"; // Replace with your MySQL password
+    private static final String PASS = "helloworld"; // Replace with your MySQL password
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -37,7 +37,7 @@ public class AccountManagementServlet extends HttpServlet {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT user_id, email,status FROM osintme.user";
+            String sql = "SELECT user_id, email,status FROM osintme.User";
             rs = stmt.executeQuery(sql);
 
             // Extract data from result set
@@ -58,7 +58,7 @@ public class AccountManagementServlet extends HttpServlet {
 
             //QUERY 2 Populate total users stat card
             stmt = conn.createStatement();
-            String sqlTotalUsers = "SELECT COUNT(*) AS total FROM osintme.user";
+            String sqlTotalUsers = "SELECT COUNT(*) AS total FROM osintme.User";
             rs= stmt.executeQuery(sqlTotalUsers);
             if (rs.next()) {
                 request.setAttribute("totalUsers", rs.getInt("total"));
@@ -68,7 +68,7 @@ public class AccountManagementServlet extends HttpServlet {
 
             //QUERY 3 Populate the active users stat card
             stmt = conn.createStatement();
-            String sqlActiveUsers = "SELECT COUNT(*) AS active FROM osintme.user WHERE STATUS = 'Active' ";
+            String sqlActiveUsers = "SELECT COUNT(*) AS active FROM osintme.User WHERE STATUS = 'Active' ";
             rs= stmt.executeQuery(sqlActiveUsers);
             if (rs.next()) {
                 request.setAttribute("activeUsers", rs.getInt("active"));
@@ -80,7 +80,7 @@ public class AccountManagementServlet extends HttpServlet {
 
             //QUERY 4 Get unique users in scan table to see who's breached
             stmt = conn.createStatement();
-            String sqlBreachedUsers = "SELECT COUNT(DISTINCT user_id) AS breached FROM osintme.scan";
+            String sqlBreachedUsers = "SELECT COUNT(DISTINCT user_id) AS breached FROM osintme.Scan";
             rs= stmt.executeQuery(sqlBreachedUsers);
             if (rs.next()) {
                 request.setAttribute("breachedUsers", rs.getInt("breached"));

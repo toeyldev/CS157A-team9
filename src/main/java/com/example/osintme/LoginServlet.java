@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userId", userId);
 
                 if (privilege.equals("Admin")) {
-                    response.sendRedirect(request.getContextPath() + "/admin-dashboard");
+                    response.sendRedirect(request.getContextPath() + "/account-management-servlet");
                 }
                 else if (privilege.equals("User")) {
                     response.sendRedirect(request.getContextPath() + "/dashboard");
@@ -52,9 +52,9 @@ public class LoginServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error","Error occured.");
+            // request.setAttribute("error", "Error occured: " + e.getMessage());
             request.getRequestDispatcher("/signin.jsp").forward(request, response);
-            // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
+            request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }
 }

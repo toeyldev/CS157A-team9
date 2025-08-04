@@ -102,7 +102,7 @@ public class RegisterServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error","Error occured.");
+            request.setAttribute("error", "Error occured: " + e.getMessage());
             request.getRequestDispatcher("/register.jsp").forward(request, response);
             // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }

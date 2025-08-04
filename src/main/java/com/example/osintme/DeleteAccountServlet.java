@@ -50,14 +50,16 @@ public class DeleteAccountServlet extends HttpServlet {
                 connection.close();
                 session.invalidate();
 
-                request.setAttribute("error","User successfully deleted.");
+                request.setAttribute("error", "User successfully deleted.");
                 request.getRequestDispatcher("/signin.jsp").forward(request, response);
                 return;
             }
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
+            request.setAttribute("error", "Error occured: " + e.getMessage());
+            request.getRequestDispatcher("/settings.jsp").forward(request, response);
+            // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
     }
 }

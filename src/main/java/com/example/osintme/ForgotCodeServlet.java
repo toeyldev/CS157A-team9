@@ -96,7 +96,7 @@ public class ForgotCodeServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error","Error occured.");
+            request.setAttribute("error", "Error occured: " + e.getMessage());
             request.getRequestDispatcher("/forgot_password.jsp").forward(request, response);
             // request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }

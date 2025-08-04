@@ -146,6 +146,8 @@ public class LoadSettingsServlet extends HttpServlet {
         }
         catch (Exception e) {
             e.printStackTrace();
+            // request.setAttribute("error", "Error occured: " + e.getMessage());
+            // request.getRequestDispatcher("/settings.jsp").forward(request, response);
             request.getRequestDispatcher("/" + e.getMessage()).forward(request, response); // for debugging
         }
         request.getRequestDispatcher("/settings.jsp").forward(request, response);
