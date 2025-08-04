@@ -34,7 +34,7 @@
 
   <body>
     <div class="container">
-      <h2>Your Settings ⛭</h2>
+      <h2>Your Settings</h2>
 
       <% String error = (String) request.getAttribute("error"); %> <% if (error
       != null) { %>

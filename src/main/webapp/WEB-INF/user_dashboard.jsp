@@ -17,7 +17,7 @@
 <h1>Welcome, ${name}!</h1>
 
 <div class="dashboard-buttons">
-  <a href="${pageContext.request.contextPath}/settings" class="button-link">Settings ⛭</a>
+  <a href="${pageContext.request.contextPath}/settings" class="button-link">Settings</a>
   <a href="${pageContext.request.contextPath}/reports" class="button-link">Breach Reports</a>
   <a href="${pageContext.request.contextPath}/initiate_scan" class="button-link">Initiate Scan</a>
 </div>
