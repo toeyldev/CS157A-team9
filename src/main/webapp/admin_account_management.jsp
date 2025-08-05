@@ -232,7 +232,13 @@
         document.getElementById("edit-userId").value = userId;
         document.getElementById("edit-email").value = email;
         document.getElementById("edit-status").value = status;
-        document.getElementById("edit-privilege").value = privilege;
+         if (privilege === "user" || privilege === "admin") {
+                    document.getElementById("edit-privilege").value = privilege;
+                } else {
+                    // if there is an issue pulling the actual priv, just set the default value to the first option in the drop down
+                    document.getElementById("edit-privilege").value = "user";
+                }
+
         editUserModal.style.display = "block";
     }
 
