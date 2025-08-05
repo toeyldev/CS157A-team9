@@ -62,11 +62,11 @@ public class AdminDeleteAccountServlet extends HttpServlet {
                     System.err.println("Admin's userId not found in session for logging activity. Using error flag ID of 0");
                     prepare.setTimestamp(1, currentTimeStamp);
                     prepare.setInt(2, 0); // Using 0 as a default ID
-                    prepare.setInt(3, 3); // action_id for Edit
+                    prepare.setInt(3, 2); // action_id for Delete
                 } else {
                     prepare.setTimestamp(1, currentTimeStamp);
                     prepare.setInt(2, adminID);
-                    prepare.setInt(3, 3); // action_id for Edit
+                    prepare.setInt(3, 2); // action_id for Delete
                 }
                 prepare.executeUpdate(); // execute
             } else {
