@@ -43,7 +43,16 @@ public class ForgotServlet extends HttpServlet {
             // User found, redirect to UserDashboardServlet.java
             if (result.next()) {
                 int userId = result.getInt("user_id");
+                String privilege = result.getString("privilege");
                 session.setAttribute("userId", userId);
+
+                if (privilege.equals("Admin")) {
+                    response.sendRedirect(request.getContextPath() + "/account-management-servlet");
+                }
+                else if (privilege.equals("User")) {
+                    response.sendRedirect(request.getContextPath() + "/dashboard");
+                }
+
                 response.sendRedirect(request.getContextPath() + "/dashboard");
             }
             
