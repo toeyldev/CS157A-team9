@@ -117,7 +117,7 @@
                                        <td><c:out value="${user.email}"/></td>
                                        <td><c:out value="${user.status}"/></td>
                                        <td>
-                                           <button class="btn btn-secondary">Edit</button>
+                                           <button class="btn btn-secondary" onclick="openEditUserModal(${user.userId}, '${user.email}', '${user.status}', '${user.privilege}')">Edit</button>
                                            <button class="btn btn-danger">Delete</button>
                                        </td>
                                    </tr>
@@ -169,30 +169,89 @@
             </div>
         </div>
     </div>
+<!-- EDIT USER MODAL -->
+<div id="editUserModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Edit User Account</h2>
+            <span class="close-btn" onclick="closeEditUserModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="${pageContext.request.contextPath}/edit-account-servlet" method="post">
+                <input type="hidden" id="edit-userId" name="userId">
+                <div class="form-group">
+                    <label for="edit-email">Email address</label>
+                    <input type="email" id="edit-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-password">New Password (optional)</label>
+                    <input type="password" id="edit-password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="edit-status">Status</label>
+                    <select id="edit-status" name="status" required>
+                        <option value="Active">Active</option>
+                        <option value="Deactivated">Deactivated</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-privilege">Privilege</label>
+                    <select id="edit-privilege" name="privilege" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditUserModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Javascript for the add new user modal
+    // Javascript for modals
 
-    // Get the modal
-    const modal = document.getElementById("addUserModal");
+    // Get the modals
+    const addUserModal = document.getElementById("addUserModal");
+    const editUserModal = document.getElementById("editUserModal");
 
-    // Function to open the modal
+    // Function to open the Add User modal
     function openAddUserModal() {
-        modal.style.display = "block";
+        addUserModal.style.display = "block";
     }
 
-    // Function to close the modal
+    // Function to close the Add User modal
     function closeAddUserModal() {
-        modal.style.display = "none";
+        addUserModal.style.display = "none";
     }
 
-    // Close the modal when the user clicks anywhere outside of it
+    // Function to open the Edit User modal and populate it with data
+    function openEditUserModal(userId, email, status, privilege) {
+        document.getElementById("edit-userId").value = userId;
+        document.getElementById("edit-email").value = email;
+        document.getElementById("edit-status").value = status;
+        document.getElementById("edit-privilege").value = privilege;
+        editUserModal.style.display = "block";
+    }
+
+    // Function to close the Edit User modal
+    function closeEditUserModal() {
+        editUserModal.style.display = "none";
+    }
+
+    // Close the modals when the user clicks anywhere outside of them
     window.onclick = function(event) {
-        if (event.target === modal) {
+        if (event.target === addUserModal) {
             closeAddUserModal();
+        }
+        if (event.target === editUserModal) {
+            closeEditUserModal();
         }
     }
 </script>
+
 
   <!-- Figure out how to implement CRUD with servlets, this is just front end for now so far (ADD IS COMPLETE)  -->
 </body>
