@@ -5,6 +5,7 @@ public class User {
     private final int userId;
     private final String email;
     private final String status;
+    private String privilege;
 
     public User(int userId, String email, String status) {
         this.userId = userId;
@@ -24,4 +25,13 @@ public class User {
     public String getStatus() {
         return status;
     }
+
+    public String getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
+    }
 }
+
