@@ -32,7 +32,7 @@ public class ForgotServlet extends HttpServlet {
             String email = (String) session.getAttribute("email");
 
             // Connection to MySQL
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "changeme");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
             
             // Query to select user_id in User table
             String forgotSql = "SELECT * FROM osintme.User WHERE email = ?";
