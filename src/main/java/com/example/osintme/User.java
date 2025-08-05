@@ -7,10 +7,11 @@ public class User {
     private final String status;
     private String privilege;
 
-    public User(int userId, String email, String status) {
+    public User(int userId, String email, String status, String privilege) {
         this.userId = userId;
         this.email = email;
         this.status = status;
+        this.privilege = privilege;
     }
 
     // Getters for all fields

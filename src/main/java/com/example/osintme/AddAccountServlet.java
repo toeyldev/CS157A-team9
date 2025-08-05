@@ -39,7 +39,7 @@ public class AddAccountServlet extends HttpServlet {
 
         try {
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "or08le49");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
             String insertUserSql = "INSERT INTO osintme.User (email, password, status, privilege) VALUES (?, ?, ?, ?)";
 

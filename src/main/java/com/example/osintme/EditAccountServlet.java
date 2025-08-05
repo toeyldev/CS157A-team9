@@ -45,7 +45,7 @@ public class EditAccountServlet extends HttpServlet {
         try {
             int userId = Integer.parseInt(userIdStr);
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "or08le49");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
 
             String updateUserSql = "UPDATE osintme.User SET email = ?, status = ?, privilege = ? WHERE user_id = ?";
             // If a new password is provided, include it in the update statement.

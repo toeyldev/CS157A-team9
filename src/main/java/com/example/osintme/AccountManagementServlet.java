@@ -21,7 +21,7 @@ public class AccountManagementServlet extends HttpServlet {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/osintme";
     private static final String USER = "root"; // Replace with your MySQL username
-    private static final String PASS = "or08le49"; // Replace with your MySQL password
+    private static final String PASS = "helloworld"; // Replace with your MySQL password
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -37,7 +37,7 @@ public class AccountManagementServlet extends HttpServlet {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT user_id, email,status FROM osintme.User";
+            String sql = "SELECT user_id, email,status, privilege FROM osintme.User";
             rs = stmt.executeQuery(sql);
 
             // Extract data from result set
@@ -46,9 +46,10 @@ public class AccountManagementServlet extends HttpServlet {
                 int userId = rs.getInt("user_id");
                 String email = rs.getString("email");
                 String status = rs.getString("status");
+                String privilege = rs.getString("privilege");
 
                 // Create a User object and add it to the list
-                User user = new User(userId, email, status);
+                User user = new User(userId, email, status, privilege);
                 users.add(user);
             }
             // Set the list of users as an attribute in the request object

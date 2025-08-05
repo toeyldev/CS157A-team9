@@ -107,6 +107,7 @@
                                 <th>User ID</th>
                                 <th>Email</th>
                                 <th>Status</th>
+                                <th>Privilege</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -116,6 +117,7 @@
                                        <td><c:out value="${user.userId}"/></td>
                                        <td><c:out value="${user.email}"/></td>
                                        <td><c:out value="${user.status}"/></td>
+                                       <td><c:out value="${user.privilege}"/></td>
                                        <td>
                                            <button class="btn btn-secondary" onclick="openEditUserModal('${user.userId}', '${user.email}', '${user.status}', '${user.privilege}')">Edit</button>
                                            <form action="${pageContext.request.contextPath}/admin-delete-account-servlet" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
