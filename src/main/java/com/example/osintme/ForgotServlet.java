@@ -32,10 +32,10 @@ public class ForgotServlet extends HttpServlet {
             String email = (String) session.getAttribute("email");
 
             // Connection to MySQL
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "changeme");
             
             // Query to select user_id in User table
-            String forgotSql = "SELECT user_id FROM osintme.User WHERE email = ?";
+            String forgotSql = "SELECT * FROM osintme.User WHERE email = ?";
             PreparedStatement prepare = connection.prepareStatement(forgotSql);
             prepare.setString(1, email);
             ResultSet result = prepare.executeQuery();
@@ -52,8 +52,6 @@ public class ForgotServlet extends HttpServlet {
                 else if (privilege.equals("User")) {
                     response.sendRedirect(request.getContextPath() + "/dashboard");
                 }
-
-                response.sendRedirect(request.getContextPath() + "/dashboard");
             }
             
             // Close connection
