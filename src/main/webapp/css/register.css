@@ -15,7 +15,7 @@ h2::after {
 }
 
 body::after {
-  content: "© 2025 OSINTMe.";
+  content: "";
 }
 
 /* from scan.css */
