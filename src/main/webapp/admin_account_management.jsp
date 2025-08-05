@@ -202,8 +202,8 @@
                 <div class="form-group">
                     <label for="edit-privilege">Privilege</label>
                     <select id="edit-privilege" name="privilege" required>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
                 <div class="form-actions">
