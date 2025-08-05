@@ -20,7 +20,7 @@ public class ActivityLogServlet extends HttpServlet {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/osintme";
     private static final String USER = "root"; // Replace with your MySQL username
-    private static final String PASS = "or08le49"; // Replace with your MySQL password
+    private static final String PASS = "helloworld"; // Replace with your MySQL password
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +38,7 @@ public class ActivityLogServlet extends HttpServlet {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT log_id, timestamp, user_id, action_id FROM osintme.activity_log";
+            String sql = "SELECT log_id, timestamp, user_id, action_id FROM osintme.Activity_Log";
             rs = stmt.executeQuery(sql);
 
 
