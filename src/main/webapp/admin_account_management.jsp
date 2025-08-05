@@ -117,8 +117,11 @@
                                        <td><c:out value="${user.email}"/></td>
                                        <td><c:out value="${user.status}"/></td>
                                        <td>
-                                           <button class="btn btn-secondary" onclick="openEditUserModal(${user.userId}, '${user.email}', '${user.status}', '${user.privilege}')">Edit</button>
-                                           <button class="btn btn-danger">Delete</button>
+                                           <button class="btn btn-secondary" onclick="openEditUserModal('${user.userId}', '${user.email}', '${user.status}', '${user.privilege}')">Edit</button>
+                                           <form action="${pageContext.request.contextPath}/admin-delete-account-servlet" method="post" onsubmit="return confirm('Are you sure you want to delete this account?');">
+                                               <input type="hidden" name="userId" value="${user.userId}"/>
+                                               <button class="btn btn-danger" type="submit">Delete</button>
+                                           </form>
                                        </td>
                                    </tr>
                                </c:forEach>
@@ -232,13 +235,7 @@
         document.getElementById("edit-userId").value = userId;
         document.getElementById("edit-email").value = email;
         document.getElementById("edit-status").value = status;
-         if (privilege === "user" || privilege === "admin") {
-                    document.getElementById("edit-privilege").value = privilege;
-                } else {
-                    // if there is an issue pulling the actual priv, just set the default value to the first option in the drop down
-                    document.getElementById("edit-privilege").value = "user";
-                }
-
+        document.getElementById("edit-privilege").value = privilege;
         editUserModal.style.display = "block";
     }
 
