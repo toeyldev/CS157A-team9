@@ -25,7 +25,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#activity" class="nav-link" data-tab="activity">
+                    <a href="/OSINTMe/activity_log.jsp" class="nav-link">
                         <span class="nav-icon">📋</span>
                         Activity Log
                     </a>

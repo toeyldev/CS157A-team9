@@ -7,10 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.*;
 
 /**
  * Servlet for handling the creation of a new user account.
@@ -37,11 +34,12 @@ public class AddAccountServlet extends HttpServlet {
         }
 
         Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement = null; //user table query
+        PreparedStatement preparedStatement2 = null; //activity log query
 
         try {
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "helloworld");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/osintme", "root", "or08le49");
 
             String insertUserSql = "INSERT INTO osintme.User (email, password, status, privilege) VALUES (?, ?, ?, ?)";
 
@@ -52,14 +50,32 @@ public class AddAccountServlet extends HttpServlet {
             preparedStatement.setString(4, privilege);
 
             int affectedRows = preparedStatement.executeUpdate();
-
             if (affectedRows > 0) {
                 // validation
                 session.setAttribute("success", "User " + email + " was successfully created.");
-            } else {
+                //ADD A ROW TO THE ACTIVITY LOG
+                String sqlAddAction = "INSERT INTO osintme.activity_log (timestamp, user_id, action_id) VALUES (?,?,?)";
+
+                preparedStatement2 = connection.prepareStatement(sqlAddAction);
+                Timestamp currentTimeStamp = new Timestamp(System.currentTimeMillis()); //retrieve current timestamp
+                Integer adminID = (Integer) session.getAttribute("userId");
+                if (adminID == null){
+                    System.err.println("Admin's userId not found in session for logging activity.");
+                }
+
+                preparedStatement2.setTimestamp(1,currentTimeStamp); //set time stamp
+                preparedStatement2.setInt(2,adminID);
+                preparedStatement2.setInt(3,1);
+
+                preparedStatement2.executeUpdate(); // execute
+            }
+
+            else {
                 // validation
                 session.setAttribute("error", "Failed to create user. Please try again.");
             }
+
+
 
         } catch (SQLIntegrityConstraintViolationException e) {
             // This exception typically indicates a duplicate key, like a unique email
@@ -69,11 +85,17 @@ public class AddAccountServlet extends HttpServlet {
             // Catch any other exceptions
             e.printStackTrace();
             session.setAttribute("error", "An error occurred while creating the user: " + e.getMessage());
+
+
+
+
         } finally {
             // Close database resources in a finally block to ensure they are always closed
             try {
                 if (preparedStatement != null)
                     preparedStatement.close();
+                if (preparedStatement2 != null)
+                    preparedStatement2.close();
                 if (connection != null)
                     connection.close();
             } catch (Exception e) {

@@ -21,7 +21,7 @@ public class AccountManagementServlet extends HttpServlet {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/osintme";
     private static final String USER = "root"; // Replace with your MySQL username
-    private static final String PASS = "helloworld"; // Replace with your MySQL password
+    private static final String PASS = "or08le49"; // Replace with your MySQL password
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
