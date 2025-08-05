@@ -5,8 +5,9 @@
     <title>Activity Log - OSINTMe</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/activitylog.css">
-    <link rel="stylesheet" href="css/admin_account_management.css">
+    <!-- Using a more robust, context-relative path for the CSS files -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/activitylog.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_account_management.css">
 </head>
 <body>
     <main class="main-content">
@@ -34,7 +35,7 @@
                             <td><c:out value="${logEntry.actionId}"/></td>
                         </tr>
                     </c:forEach>
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </main>

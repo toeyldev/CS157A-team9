@@ -25,7 +25,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/OSINTMe/activity_log.jsp" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/activity-log-servlet" class="nav-link">
                         <span class="nav-icon">📋</span>
                         Activity Log
                     </a>
