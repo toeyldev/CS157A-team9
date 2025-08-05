@@ -25,10 +25,11 @@ public class User {
     public String getStatus() {
         return status;
     }
-
+    //added this
     public String getPrivilege() {
         return privilege;
     }
+
 
     public void setPrivilege(String privilege) {
         this.privilege = privilege;
