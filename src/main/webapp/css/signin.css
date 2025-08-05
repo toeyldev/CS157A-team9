@@ -234,19 +234,6 @@ form::after {
   }
 }
 
-/* Footer */
-body::after {
-  content: '© 2025 OSINTMe. Your privacy and security are our top priorities.';
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--gray-500);
-  font-size: 0.75rem;
-  text-align: center;
-}
-
-
 @media (max-width: 640px) {
   body {
     padding: 0.5rem;
